@@ -12,6 +12,26 @@ use common\models\LoginForm;
  */
 class SiteController extends Controller
 {
+    public $layout;
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action) {
+        if (parent::beforeAction($action)) {
+
+            if ($action->id == 'login') {
+                $this->layout = 'login';
+            } else {
+                $this->layout = 'main';
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @inheritdoc
      */
@@ -71,13 +91,16 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
+            Yii::trace(' Go Home');
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            Yii::trace(' Go Back');
             return $this->goBack();
         } else {
+            Yii::trace(' Go Login');
             return $this->render('login', [
                 'model' => $model,
             ]);
