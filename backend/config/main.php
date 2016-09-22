@@ -48,6 +48,14 @@ return [
             ],
         ],
         */
+       'assetManager' => [
+        'bundles' => [
+            'assets\AppAsset' => [
+                'skin' => 'skin-black',
+            ],
+        ],
+    ],
+
     ],
     'params' => $params,
 ];
