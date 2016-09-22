@@ -27,12 +27,12 @@
                 'items' => [
                     ['label' => 'Catalogs', 'options' => ['class' => 'header']],
                     [
-                        'label' => 'Categories',
-                        'icon' => 'fa fa-share',
+                        'label' => 'Catalogs',
+                        'icon' => 'fa fa-book',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Categories', 'icon' => 'fa fa-file-code-o', 'url' => ['category/index'],],
-                            ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['category/index'],],
+                            ['label' => 'Categories', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/category/index'],],
+                            ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/category/index'],],
                         ],
                     ],
                     ['label' => 'Theme', 'options' => ['class' => 'header']],

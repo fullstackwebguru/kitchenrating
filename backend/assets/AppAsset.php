@@ -13,16 +13,18 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/AdminLTE.min.css'
+        'css/app.css',
+        'css/AdminLTE.min.css',
     ];
     public $js = [
-        'js/app.min.js'
+        'js/app.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'rmrevin\yii\fontawesome\AssetBundle'
+        'backend\assets\IoniconAsset',
+        'rmrevin\yii\fontawesome\AssetBundle',
     ];
 
     public $skin = 'skin-black';

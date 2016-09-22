@@ -5,7 +5,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use backend\models\CategoryForm;
 
 /**
  * Site controller
@@ -24,7 +24,7 @@ class CategoryController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index','create'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -46,12 +46,30 @@ class CategoryController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Displays Category Index
      *
      * @return string
      */
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * Displays Category Index
+     *
+     * @return string
+     */
+    public function actionCreate()
+    {
+        $model = new CategoryForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 }
