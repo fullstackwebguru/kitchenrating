@@ -32,11 +32,12 @@
                         'url' => '#',
                         'items' => [
                             ['label' => 'Categories', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/category/index'],],
-                            ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/category/index'],],
+                            ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/product/index'],],
                         ],
                     ],
                     ['label' => 'Theme', 'options' => ['class' => 'header']],
                     ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
+                    ['label' => 'Gii', 'icon' => 'fa fa-dashboard', 'url' => ['/gii']],
                 ],
             ]
         ) ?>

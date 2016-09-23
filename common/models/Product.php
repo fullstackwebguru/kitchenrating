@@ -5,23 +5,26 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\behaviors\SluggableBehavior;
 
 /**
- * Product model
+ * This is the model class for table "product".
  *
  * @property integer $id
- * @property integer $parent_id
+ * @property integer $category_id
  * @property string $title
  * @property string $slug
  * @property string $description
+ * @property double $rating
+ * @property integer $num_rating
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  *
- *
- * @property Product $parent
- * 
+ * @property Category $category
+ * @property ProductImage[] $productImages
  */
+
 class Product extends ActiveRecord
 {
     const STATUS_DELETED = 0;
@@ -57,8 +60,15 @@ class Product extends ActiveRecord
     public function rules()
     {
         return [
+            [['category_id', 'num_rating', 'status'], 'integer'],
+            [['title'], 'required'],
+            [['description'], 'string'],
+            [['rating'], 'number'],
+            [['title', 'slug'], 'string', 'max' => 255],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_DISABLED]],
+
         ];
     }
 
@@ -69,54 +79,31 @@ class Product extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'parent_id' => 'Parent',
+            'category_id' => 'Category',
             'title' => 'Title',
             'slug' => 'Slug',
-            'status' => 'Status'
+            'description' => 'Description',
+            'rating' => 'Rating',
+            'num_rating' => 'Num Rating',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
     /**
-     * Finds category by title
-     *
-     * @param string $title
-     * @return static|null
+     * @return \yii\db\ActiveQuery
      */
-    public static function findByProducttitle($title)
+    public function getCategory()
     {
-        return static::findOne(['title' => $title, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->getPrimaryKey();
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getParent()
+    public function getProductImages()
     {
-        return $this->hasOne(Product::className(), ['id' => 'parent_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategories()
-    {
-        return $this->hasMany(Product::className(), ['parent_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProducts()
-    {
-        // return $this->hasMany(Product::className(), ['category_id' => 'id']);
-        return [];
+        return $this->hasMany(ProductImage::className(), ['product_id' => 'id']);
     }
 }

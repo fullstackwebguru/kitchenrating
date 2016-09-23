@@ -4,10 +4,11 @@ namespace common\models;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\SluggableBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * Category model
+ * This is the model class for table "category".
  *
  * @property integer $id
  * @property integer $parent_id
@@ -17,12 +18,11 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property integer $updated_at
  *
- *
  * @property Category $parent
  * @property Category[] $categories
- * @property Products[] $products
- * 
+ * @property Product[] $products
  */
+
 class Category extends ActiveRecord
 {
     const STATUS_DELETED = 0;
@@ -58,7 +58,10 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            [['parent_id', 'status'], 'integer'],
+            [['title'], 'required'],
+            [['title', 'slug'], 'string', 'max' => 255],
+            [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_DISABLED]],
         ];
     }
@@ -73,27 +76,10 @@ class Category extends ActiveRecord
             'parent_id' => 'Parent',
             'title' => 'Title',
             'slug' => 'Slug',
-            'status' => 'Status'
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
-    }
-
-    /**
-     * Finds category by title
-     *
-     * @param string $title
-     * @return static|null
-     */
-    public static function findByCategorytitle($title)
-    {
-        return static::findOne(['title' => $title, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
-        return $this->getPrimaryKey();
     }
 
     /**
@@ -117,7 +103,17 @@ class Category extends ActiveRecord
      */
     public function getProducts()
     {
-        // return $this->hasMany(Product::className(), ['category_id' => 'id']);
-        return [];
+        return $this->hasMany(Product::className(), ['category_id' => 'id']);
+    }
+
+    /**
+     * Finds category by title
+     *
+     * @param string $title
+     * @return static|null
+     */
+    public static function findByCategorytitle($title)
+    {
+        return static::findOne(['title' => $title, 'status' => self::STATUS_ACTIVE]);
     }
 }

@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
+    'language' => 'en-US',
     'name' => 'KitchenRating BackOffice',
     'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
