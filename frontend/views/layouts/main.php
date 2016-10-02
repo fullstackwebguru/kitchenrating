@@ -22,60 +22,80 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="home" id="site_body">
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+<a href="#site_body" class="go_to_top">
+  <i class="fa fa-angle-up"></i>
+</a>
+<div class="social_share">
+  <a href="">
+    <span>Facebook</span>
+    <i class="fa fa-facebook"></i>
+  </a>
+  <a href="">
+    <span>Twitter</span>
+    <i class="fa fa-twitter"></i>
+  </a>
+  <a href="">
+    <span>Facebook</span>
+    <i class="fa fa-facebook"></i>
+  </a>
+  <a href="">
+    <span>Twitter</span>
+    <i class="fa fa-twitter"></i>
+  </a>
+</div>
+<div class="site_wraper">
+    <nav class="navbar navbar-default navbar-static-top header_section">
+        <div class="container">
+          <div class="navbar-header">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button><!-- 
+            <div class="pull-right">
+              <div class="header_search_box">
+                <form action="index.html">
+                  <input placeholder="Search.." type="text" name="stop">
+                  <button type="submit" name='ts'><i class="fa fa-search"></i></button>
+                </form>
+              </div>
+            </div> -->
+            <a href="#" class="navbar-brand top_logo">
+              KitchenRatings
+            </a>
+          </div>
+          <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right rs_main_menu">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+    </nav>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <?= $content ?>
+
+    <div class="footer">
+        <div class="container">
+            <div class="pull-right">
+                <ul class="nav nav-pills">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">ToS</a></li>
+                    <li><a href="#">Disclamer</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="pull-left">
+                <p class="copy_right">&copy; Copyright 2016 KitchenRatings. All rights reserved.</p>
+            </div>
+        </div>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
 <?php $this->endBody() ?>
 </body>
 </html>
