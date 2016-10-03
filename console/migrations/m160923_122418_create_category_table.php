@@ -24,6 +24,7 @@ class m160923_122418_create_category_table extends Migration
             'title' => $this->string(255)->notNull(),
             'slug' => $this->string(255),
             'status' => $this->boolean()->notNull()->defaultValue(true),
+            'color' => $this->string(11),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ],$tableOptions);

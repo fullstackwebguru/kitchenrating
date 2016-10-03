@@ -9,6 +9,9 @@ use backend\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
+use yii\helpers\Html;
+use kartik\detail\DetailView;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -38,13 +41,31 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CategorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if (Yii::$app->request->isAjax && Yii::$app->request->post('hasEditable')) {
+            $categoryId = Yii::$app->request->post('editableKey');
+            $model = $this->findModel($categoryId);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
-        ]);
+            $out = ['output'=>'', 'message'=>''];
+            $posted = current(Yii::$app->request->post('Category'));
+            $post = ['Category' => $posted];
+
+            if ($model->load($post) && $model->save()) {
+                $out['message'] = '';
+            } else {
+                $out['message'] = 'Error in request';
+            }
+
+            echo Json::encode($out);
+            return;
+        } else {
+            $searchModel = new CategorySearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider
+            ]);
+        }
     }
 
     /**
@@ -54,9 +75,37 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+
+        if (Yii::$app->request->isAjax && Yii::$app->request->post('kvdelete')) {
+            $this->findModel($id)->delete();
+
+            echo Json::encode([
+                'success' => true,
+                'messages' => [
+                    'kv-detail-info' => 'The category # ' . $id . ' was successfully deleted. ' . 
+                        Html::a('<i class="glyphicon glyphicon-hand-right"></i>  Click here', 
+                            ['index'], ['class' => 'btn btn-sm btn-info']) . ' to proceed.'
+                ]
+            ]);
+            return;
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+
+            if (Yii::$app->request->get('viewMode') == 'edit') {
+                $viewMode = DetailView::MODE_EDIT;    
+            } else {
+                $viewMode = DetailView::MODE_VIEW;
+            }
+
+            return $this->render('view', [
+                'model' => $model,
+                'viewMode' => $viewMode
+            ]);
+        }
     }
 
     /**
@@ -90,8 +139,9 @@ class CategoryController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+            return $this->render('view', [
                 'model' => $model,
+                'viewMode' => DetailView::MODE_EDIT
             ]);
         }
     }
@@ -105,7 +155,6 @@ class CategoryController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
@@ -125,3 +174,4 @@ class CategoryController extends Controller
         }
     }
 }
+

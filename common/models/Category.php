@@ -15,6 +15,7 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property string $slug
  * @property integer $status
+ * @property string $color
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -58,8 +59,8 @@ class Category extends ActiveRecord
     {
         return [
             [['parent_id', 'status'], 'integer'],
-            [['title'], 'required'],
-            [['title', 'slug'], 'string', 'max' => 255],
+            [['title','status'], 'required'],
+            [['title', 'slug', 'color'], 'string', 'max' => 255],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
             ['status', 'boolean'],
         ];
@@ -75,6 +76,7 @@ class Category extends ActiveRecord
             'parent_id' => 'Parent',
             'title' => 'Title',
             'slug' => 'Slug',
+            'color' => 'Color',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

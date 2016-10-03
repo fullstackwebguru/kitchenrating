@@ -36,7 +36,13 @@ $gridColumns = [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
         'vAlign'=>'middle',
-        'urlCreator' => function($action, $model, $key, $index) { return Url::toRoute([$action, 'id'=>$key]); },
+        'urlCreator' => function($action, $model, $key, $index) { 
+            if ($action == 'update') {
+                return Url::toRoute(['view', 'id'=>$key, 'viewMode'=>'edit']);     
+            } else {
+                return Url::toRoute([$action, 'id'=>$key]);
+            }
+        },
         'viewOptions'=>['title'=>$viewMsg, 'data-toggle'=>'tooltip'],
         'updateOptions'=>['title'=>$updateMsg, 'data-toggle'=>'tooltip'],
         'deleteOptions'=>['title'=>$deleteMsg, 'data-toggle'=>'tooltip'], 
@@ -46,48 +52,19 @@ $gridColumns = [
 ?>
 
 <div class="row">
-    <div class="col-sm-3 col-xs-6">
-		<div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Total</span>
-              <span class="info-box-number">90</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-	</div>
-
-	<div class="col-sm-3 col-xs-6">
-		<div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Disabled</span>
-              <span class="info-box-number">4</small></span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-	</div>
-
-	<div class="col-sm-6 col-xs-12">
-
-		<div class="row">
-		    <div class="col-sm-6 col-xs-12">
-		      
+    <div class="col-sm-6 col-xs-12">
+      
+    </div>
+    <!-- /.col -->
+    <div class="col-sm-6 col-xs-12">
+	    <a href="<?= Url::to(['create'])?>" class="pull-right">
+	    	<div class="description-block border-right">
+	    		<span class="icon-button"><i class="ion ion-plus-circled"></i></span>
+		        <h5 class="description-text">New Category</h5>
 		    </div>
-		    <!-- /.col -->
-		    <div class="col-sm-6 col-xs-12">
-    		    <a href="<?= Url::to(['create'])?>" class="pull-right">
-    		    	<div class="description-block border-right">
-    		    		<span class="icon-button"><i class="ion ion-plus-circled"></i></span>
-    			        <h5 class="description-text">New Category</h5>
-    			    </div>
-                 </a>
-		      <!-- /.description-block -->
-		    </div>
-		</div>
-	</div>
+         </a>
+      <!-- /.description-block -->
+    </div>
 </div>
 
 <div class="row">
@@ -99,7 +76,7 @@ $gridColumns = [
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => $gridColumns,
-        'toolbar' => false,
+        'toolbar'=> false,
         'export' => false,
         'containerOptions' => ['style'=>'overflow: auto'], // only set when $responsive = false
         'pjax' => true,

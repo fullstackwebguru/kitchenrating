@@ -31,8 +31,8 @@
                         'icon' => 'fa fa-book',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Categories', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/category/index'],],
-                            ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/product/index'],],
+                            ['label' => 'Categories', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/category'],],
+                            ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/product'],],
                         ],
                     ],
                     ['label' => 'Theme', 'options' => ['class' => 'header']],
