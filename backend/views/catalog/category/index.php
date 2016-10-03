@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\Url;
 use common\models\Category;
 
@@ -11,6 +11,38 @@ use common\models\Category;
 
 $this->title = 'Categories';
 $this->params['breadcrumbs'][] = $this->title;
+
+$viewMsg = 'View Category Details';
+$updateMsg = 'Update Category Details';
+$deleteMsg = 'Delte Category';
+
+$gridColumns = [
+    ['class' => 'kartik\grid\SerialColumn'],
+    [
+        'class' => 'kartik\grid\EditableColumn',
+        'attribute' => 'title',
+        'pageSummary' => 'Page Total',
+        'vAlign'=>'middle',
+        'headerOptions'=>['class'=>'kv-sticky-column'],
+        'contentOptions'=>['class'=>'kv-sticky-column'],
+        'editableOptions'=>['header'=>'Title']
+    ],
+    [
+        'class'=>'kartik\grid\BooleanColumn',
+        'attribute'=>'status', 
+        'vAlign'=>'middle'
+    ], 
+    [
+        'class' => 'kartik\grid\ActionColumn',
+        'dropdown' => false,
+        'vAlign'=>'middle',
+        'urlCreator' => function($action, $model, $key, $index) { return Url::toRoute([$action, 'id'=>$key]); },
+        'viewOptions'=>['title'=>$viewMsg, 'data-toggle'=>'tooltip'],
+        'updateOptions'=>['title'=>$updateMsg, 'data-toggle'=>'tooltip'],
+        'deleteOptions'=>['title'=>$deleteMsg, 'data-toggle'=>'tooltip'], 
+    ],
+];
+
 ?>
 
 <div class="row">
@@ -60,42 +92,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
     <div class="col-xs-12">
-    <div class="box">
-    <div class="box-body">
+    <!-- <div class="box">
+    <div class="box-body"> -->
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'id',
-            [
-                'attribute' => 'parent_id',
-                'value' => function($model) {
-                    return empty($model->parent_id) ? '' : $model->parent->title;
-                }
-            ],
-
-            'title',
-            [
-                'attribute' => 'status',
-                'value' => function($model) {
-                    switch ($model->status) {
-                        case Category::STATUS_DELETED:
-                            return "deleted";
-                        default:
-                            return "Active";
-                    }
-                }
-            ],
-            // 'created_at',
-            // 'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+        'columns' => $gridColumns,
+        'toolbar' => false,
+        'export' => false,
+        'containerOptions' => ['style'=>'overflow: auto'], // only set when $responsive = false
+        'pjax' => true,
+        'bordered' => true,
+        'striped' => false,
+        'condensed' => false,
+        'responsive' => true,
+        'hover' => true,
+        'showPageSummary' => false,
+        'panel' => [
+            'type' => GridView::TYPE_PRIMARY
         ],
-    ]); ?>
-    </div>
-    </div>
+    ]);?>
+    <!-- </div>
+    </div> -->
     </div>
 </div>

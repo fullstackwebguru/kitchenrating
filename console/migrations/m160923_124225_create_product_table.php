@@ -26,7 +26,7 @@ class m160923_124225_create_product_table extends Migration
             'description' => $this->text(),
             'rating' => $this->double(2),
             'num_rating' => $this->integer(11),
-            'status' => $this->integer()->notNull()->defaultValue(10),
+            'status' => $this->boolean()->notNull()->defaultValue(true),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ],$tableOptions);

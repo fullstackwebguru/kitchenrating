@@ -3,6 +3,7 @@
 namespace backend\controllers\catalog;
 
 use Yii;
+use kartik\grid\EditableColumnAction;
 use common\models\Category;
 use backend\models\CategorySearch;
 use yii\web\Controller;
@@ -42,7 +43,7 @@ class CategoryController extends Controller
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 

@@ -27,9 +27,8 @@ use yii\behaviors\SluggableBehavior;
 
 class Product extends ActiveRecord
 {
-    const STATUS_DELETED = 0;
-    const STATUS_DISABLED = 2;
-    const STATUS_ACTIVE = 10;
+    const STATUS_DELETED = false;
+    const STATUS_ACTIVE = true;
 
     /**
      * @inheritdoc
@@ -67,7 +66,7 @@ class Product extends ActiveRecord
             [['title', 'slug'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED, self::STATUS_DISABLED]],
+            ['status', 'boolean'],
 
         ];
     }
