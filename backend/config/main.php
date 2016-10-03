@@ -12,6 +12,7 @@ return [
     'name' => 'KitchenRating BackOffice',
     'homeUrl' => '/admin',
     'basePath' => dirname(__DIR__),
+    'defaultRoute' => 'catalog/category/index',
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
