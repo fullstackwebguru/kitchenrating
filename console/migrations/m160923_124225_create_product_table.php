@@ -20,12 +20,15 @@ class m160923_124225_create_product_table extends Migration
 
         $this->createTable('{{%product}}', [
             'id' => $this->primaryKey(11),
-            'category_id' => $this->integer(11),
+            'category_id' => $this->integer(11)->notNull(),
             'title' => $this->string(255)->notNull(),
             'slug' => $this->string(255),
             'description' => $this->text(),
-            'rating' => $this->double(2),
-            'num_rating' => $this->integer(11),
+            'product_url' => $this->string(255)->notNull(),
+            'store_id' => $this->integer(11)->notNull(),
+            'rating' => $this->double(2)->notNull(),
+            'num_rating' => $this->integer(11)->notNull(),
+            'color' => $this->string(11),
             'status' => $this->boolean()->notNull()->defaultValue(true),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
@@ -42,3 +45,4 @@ class m160923_124225_create_product_table extends Migration
         $this->dropTable('{{%product}}');
     }
 }
+
