@@ -3,6 +3,7 @@
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 
 
 $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
@@ -15,8 +16,7 @@ echo Form::widget([
         'category_id'=>[
             'type'=>Form::INPUT_WIDGET, 
             'widgetClass'=>'\kartik\widgets\Select2', 
-            'options'=>['data'=>ArrayHelper::map($categories, 'id', 'title')], 
-            'hint'=>'Type and select category'
+            'options'=>['data'=>ArrayHelper::map($categories, 'id', 'title')]
         ],
     ]
 ]);
@@ -35,7 +35,7 @@ echo Form::widget([
     'form'=>$form,
     'columns'=> 1,
     'attributes'=>[       //  column layout
-        'description'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter title...']]
+        'description'=>['type'=>Form::INPUT_TEXTAREA, 'options'=>['placeholder'=>'Enter descriptions...']]
     ]
 ]);
 
@@ -53,10 +53,26 @@ echo Form::widget([
     'form'=>$form,
     'columns'=> 1,
     'attributes'=>[       //  column layout
-        'product_store'=>[
-            'type'=>Form::INPUT_RADIO_LIST, 
-            'items'=>['Amazon'=>'Amazon', 'Ebay'=>'Ebay'],
-            'options'=>['inline'=>true]
+        'store_id'=>[
+            'type'=>Form::INPUT_WIDGET, 
+            'widgetClass'=>'\kartik\widgets\Select2', 
+            'options'=>['data'=>ArrayHelper::map($stores, 'id', 'title')],
+        ],
+    ]
+]);
+
+
+echo Form::widget([       // 3 column layout
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=>2,
+    'attributes'=>[
+        'rating'=>[
+            'type'=>Form::INPUT_TEXT, 
+            'options'=>['placeholder'=>'Enter product rating...']
+        ],
+        'num_rating'=>[
+            'type'=>Form::INPUT_TEXT
         ],
     ]
 ]);
@@ -87,27 +103,3 @@ echo Form::widget([       // 3 column layout
 ]);
 ActiveForm::end();
 ?>
-
-<div class="product-form">
-
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map($categories, 'id', 'title'), ['prompt' => 'Select category ...']) ?>
-
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'rating')->textInput() ?>
-
-    <?= $form->field($model, 'num_rating')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>

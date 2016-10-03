@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $title
  *
- * @property Product $product
+ * @property Product[] $products
  */
 class Store extends \yii\db\ActiveRecord
 {

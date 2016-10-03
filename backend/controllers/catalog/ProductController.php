@@ -5,10 +5,14 @@ namespace backend\controllers\catalog;
 use Yii;
 use common\models\Category;
 use common\models\Product;
+use common\models\Store;
 use backend\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
+
+use kartik\detail\DetailView;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -36,13 +40,38 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if (Yii::$app->request->isAjax && Yii::$app->request->post('hasEditable')) {
+            $productId = Yii::$app->request->post('editableKey');
+            $model = $this->findModel($productId);
+
+            $out = ['output'=>'', 'message'=>''];
+            $posted = current(Yii::$app->request->post('Product'));
+            $post = ['Product' => $posted];
+
+            if ($model->load($post) && $model->save()) {
+                $out['message'] = '';
+            } else {
+                $out['message'] = 'Error in request';
+            }
+
+            echo Json::encode($out);
+            return;
+        } else {
+
+            $categories = Category::find()->orderBy('title')->asArray()->all();
+            $stores = Store::find()->orderBy('title')->asArray()->all();
+
+            $searchModel = new ProductSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'categories' => $categories,
+                'stores' => $stores
+            ]);
+        }
     }
 
     /**
@@ -52,9 +81,43 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+
+        $model = $this->findModel($id);
+
+        if (Yii::$app->request->isAjax && Yii::$app->request->post('kvdelete')) {
+            $this->findModel($id)->delete();
+
+            echo Json::encode([
+                'success' => true,
+                'messages' => [
+                    'kv-detail-info' => 'The category # ' . $id . ' was successfully deleted. ' . 
+                        Html::a('<i class="glyphicon glyphicon-hand-right"></i>  Click here', 
+                            ['index'], ['class' => 'btn btn-sm btn-info']) . ' to proceed.'
+                ]
+            ]);
+            return;
+        }
+
+        $categories = Category::find()->orderBy('title')->asArray()->all();
+        $stores = Store::find()->orderBy('title')->asArray()->all();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+
+            if (Yii::$app->request->get('viewMode') == 'edit') {
+                $viewMode = DetailView::MODE_EDIT;    
+            } else {
+                $viewMode = DetailView::MODE_VIEW;
+            }
+
+            return $this->render('view', [
+                'model' => $model,
+                'viewMode' => $viewMode,
+                'categories' => $categories,
+                'stores' => $stores
+            ]);
+        }
     }
 
     /**
@@ -64,7 +127,8 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
-        $categories = Category::find()->all();
+        $categories = Category::find()->orderBy('title')->asArray()->all();
+        $stores = Store::find()->orderBy('title')->asArray()->all();
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -72,7 +136,8 @@ class ProductController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'categories' => $categories
+                'categories' => $categories,
+                'stores' => $stores
             ]);
         }
     }
@@ -85,7 +150,8 @@ class ProductController extends Controller
      */
     public function actionUpdate($id)
     {
-        $categories = Category::find()->all();
+        $categories = Category::find()->orderBy('title')->asArray()->all();
+        $stores = Store::find()->orderBy('title')->asArray()->all();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -93,7 +159,8 @@ class ProductController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'categories' => $categories
+                'categories' => $categories,
+                'stores' => $stores
             ]);
         }
     }
