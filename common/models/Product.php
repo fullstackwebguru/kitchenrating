@@ -62,7 +62,7 @@ class Product extends ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'num_rating', 'status'], 'integer'],
+            [['category_id', 'num_rating'], 'integer'],
             [['title', 'category_id', 'store_id', 'product_url', 'rating','num_rating'], 'required'],
             [['description','color','product_url',], 'string'],
             [['rating'], 'number'],

@@ -58,7 +58,7 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'status'], 'integer'],
+            [['parent_id'], 'integer'],
             [['title','status'], 'required'],
             [['title', 'slug', 'color'], 'string', 'max' => 255],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],

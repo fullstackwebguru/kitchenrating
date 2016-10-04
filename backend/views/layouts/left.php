@@ -33,6 +33,7 @@
                         'items' => [
                             ['label' => 'Categories', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/category'],],
                             ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/product'],],
+                            ['label' => 'Guides', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/guide'],],
                         ],
                     ],
                     ['label' => 'Theme', 'options' => ['class' => 'header']],
