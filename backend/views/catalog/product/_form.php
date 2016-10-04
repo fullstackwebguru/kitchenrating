@@ -4,6 +4,7 @@ use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use kartik\markdown\MarkdownEditor;
 
 
 $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
@@ -30,14 +31,10 @@ echo Form::widget([
     ]
 ]);
 
-echo Form::widget([
-    'model'=>$model,
-    'form'=>$form,
-    'columns'=> 1,
-    'attributes'=>[       //  column layout
-        'description'=>['type'=>Form::INPUT_TEXTAREA, 'options'=>['placeholder'=>'Enter descriptions...']]
-    ]
-]);
+echo $form->field($model, 'description')->widget(
+    MarkdownEditor::classname(), 
+    ['height' => 300, 'encodeLabels' => false]
+);
 
 echo Form::widget([
     'model'=>$model,

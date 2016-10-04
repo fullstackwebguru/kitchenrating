@@ -17,6 +17,10 @@ return [
     'bootstrap' => ['log'],
     'modules' => [
         'gridview' => ['class' => 'kartik\grid\Module'],
+        'markdown' => [
+            'class' => 'kartik\markdown\Module',
+            'smartyPants' => false
+        ],
     ],
     'components' => [
         'request' => [

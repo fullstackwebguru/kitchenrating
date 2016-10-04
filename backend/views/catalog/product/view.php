@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use kartik\detail\DetailView;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use kartik\markdown\Markdown;
+use kartik\markdown\MarkdownEditor;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -71,7 +74,12 @@ $attributes = [
     ],
     [
         'attribute'=>'description', 
-        'value'=>$model->description
+        'format'=>'raw',
+        'value'=>Markdown::convert($model->description),
+        'type'=>DetailView::INPUT_WIDGET,
+        'widgetOptions'=>[
+            'class' => MarkdownEditor::classname()
+        ]
     ],
     [
         'attribute'=>'product_url', 

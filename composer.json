@@ -25,7 +25,9 @@
         "kartik-v/yii2-widgets": "@dev",
         "kartik-v/yii2-detail-view": "@dev",
         "kartik-v/yii2-builder": "dev-master",
-        "yiisoft/yii2-imagine": "~2.0.0"
+        "yiisoft/yii2-imagine": "~2.0.0",
+        "michelf/php-smartypants" : "1.6-beta1",
+        "kartik-v/yii2-markdown": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
