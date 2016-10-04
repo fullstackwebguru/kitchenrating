@@ -20,7 +20,7 @@ class SiteController extends Controller
     public function beforeAction($action) {
         if (parent::beforeAction($action)) {
 
-            if ($action->id == 'login') {
+            if ($action->id == 'login' || $action->id == 'signup') {
                 $this->layout = 'login';
             } else {
                 $this->layout = 'main';
@@ -42,7 +42,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error','signup'],
                         'allow' => true,
                     ],
                     [
@@ -80,7 +80,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        // return $this->render('index');
+        return $this->goHome();
     }
 
     /**
@@ -108,6 +109,18 @@ class SiteController extends Controller
     }
 
     /**
+     * Signup action.
+     *
+     * @return string
+     */
+    public function actionSignup() {
+        return $this->render('register', [
+            
+        ]);
+    }
+
+
+    /**
      * Logout action.
      *
      * @return string
@@ -115,7 +128,6 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 }
