@@ -18,6 +18,8 @@ use kartik\detail\DetailView;
  */
 class GuideController extends Controller
 {
+    public $layout = 'catalog';
+    
     /**
      * @inheritdoc
      */

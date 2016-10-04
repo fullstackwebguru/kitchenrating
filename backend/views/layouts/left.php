@@ -25,18 +25,21 @@
             [
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
+                    ['label' => 'Admin', 'options' => ['class' => 'header']],
+                    ['label' => 'Users', 'icon' => 'fa fa-dashboard', 'url' => ['/user']],
                     ['label' => 'Catalogs', 'options' => ['class' => 'header']],
                     [
                         'label' => 'Catalogs',
                         'icon' => 'fa fa-book',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Categories', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/category'],],
-                            ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/product'],],
-                            ['label' => 'Guides', 'icon' => 'fa fa-file-code-o', 'url' => ['catalog/guide'],],
+                            ['label' => 'Categories', 'icon' => 'fa fa-file-code-o', 'url' => ['/catalog/category'],],
+                            ['label' => 'Products', 'icon' => 'fa fa-file-code-o', 'url' => ['/catalog/product'],],
+                            ['label' => 'Guides', 'icon' => 'fa fa-file-code-o', 'url' => ['/catalog/guide'],],
                         ],
                     ],
                     ['label' => 'Theme', 'options' => ['class' => 'header']],
+                    ['label' => 'Product', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
                     ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
                     ['label' => 'Gii', 'icon' => 'fa fa-dashboard', 'url' => ['/gii']],
                 ],
