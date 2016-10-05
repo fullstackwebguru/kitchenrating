@@ -12,13 +12,16 @@ use common\models\Product;
  */
 class ProductSearch extends Product
 {
+
+    public $defaultSearch = [];
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'category_id', 'store_id','num_rating', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'category_id', 'store_id','num_rating', 'status','featured','popular','created_at', 'updated_at'], 'integer'],
             [['title', 'slug', 'description'], 'safe'],
             [['rating'], 'number'],
         ];
@@ -31,6 +34,14 @@ class ProductSearch extends Product
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    public function setFeatured() {
+        $this->defaultSearch['featured'] = true;
+    }
+
+    public function setPopular() {
+        $this->defaultSearch['popular'] = true;
     }
 
     /**
@@ -59,7 +70,8 @@ class ProductSearch extends Product
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
+        // 
+        $where = [
             'id' => $this->id,
             'category_id' => $this->category_id,
             'store_id' => $this->store_id,
@@ -68,7 +80,13 @@ class ProductSearch extends Product
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ]);
+        ];
+
+        foreach($this->defaultSearch as $key => $value) {
+            $where[$key] = $value;
+        }
+
+        $query->andFilterWhere($where);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'slug', $this->slug])

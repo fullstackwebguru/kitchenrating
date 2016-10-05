@@ -20,6 +20,8 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $num_rating
  * @property integer $status
  * @property string $color
+ * @property integer $featured
+ * @property integer $popular
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -72,7 +74,7 @@ class Product extends ActiveRecord
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['store_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'boolean'],
+            [['status', 'popular', 'featured'], 'boolean'],
             // /[['temp_images'], 'file','skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }

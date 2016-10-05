@@ -95,6 +95,32 @@ $attributes = [
         'value'=>$model->num_rating
     ],
     [
+        'attribute'=>'featured', 
+        'label'=>'Featured?',
+        'format'=>'raw',
+        'value'=>$model->featured ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+        'type'=>DetailView::INPUT_SWITCH,
+        'widgetOptions' => [
+            'pluginOptions' => [
+                'onText' => 'Yes',
+                'offText' => 'No',
+            ]
+        ],
+    ],
+    [
+        'attribute'=>'popular', 
+        'label'=>'Popular?',
+        'format'=>'raw',
+        'value'=>$model->popular ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+        'type'=>DetailView::INPUT_SWITCH,
+        'widgetOptions' => [
+            'pluginOptions' => [
+                'onText' => 'Yes',
+                'offText' => 'No',
+            ]
+        ],
+    ],
+    [
         'group'=>true,
         'label'=>'SEO Information',
         'rowOptions'=>['class'=>'info']

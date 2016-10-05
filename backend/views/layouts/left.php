@@ -39,9 +39,8 @@
                         ],
                     ],
                     ['label' => 'Theme', 'options' => ['class' => 'header']],
-                    ['label' => 'Product', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
-                    ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
-                    ['label' => 'Gii', 'icon' => 'fa fa-dashboard', 'url' => ['/gii']],
+                    ['label' => 'Featured', 'icon' => 'fa fa-dashboard', 'url' => ['/theme/featured']],
+                    ['label' => 'Popular', 'icon' => 'fa fa-dashboard', 'url' => ['/theme/popular']],
                 ],
             ]
         ) ?>

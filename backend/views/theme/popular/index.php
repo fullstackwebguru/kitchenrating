@@ -9,12 +9,12 @@ use yii\helpers\ArrayHelper;
 /* @var $searchModel backend\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
+$this->title = 'Popular Products';
 $this->params['breadcrumbs'][] = $this->title;
 
 $viewMsg = 'View Product Details';
 $updateMsg = 'Update Product Details';
-$deleteMsg = 'Delete Product';
+$deleteMsg = 'Delte Product';
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
@@ -74,25 +74,6 @@ $gridColumns = [
         'format'=>'raw'
     ],
     [
-        'class'=>'kartik\grid\BooleanColumn',
-        'attribute'=>'popular', 
-        'vAlign'=>'middle',
-        'trueLabel' => 'Yes',
-        'falseLabel' => 'No',
-    ],
-    [
-        'class'=>'kartik\grid\BooleanColumn',
-        'attribute'=>'featured', 
-        'vAlign'=>'middle',
-        'trueLabel' => 'Yes',
-        'falseLabel' => 'No',
-    ],
-    [
-        'class'=>'kartik\grid\BooleanColumn',
-        'attribute'=>'status', 
-        'vAlign'=>'middle'
-    ],
-    [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
         'vAlign'=>'middle',
@@ -103,29 +84,13 @@ $gridColumns = [
                 return Url::toRoute([$action, 'id'=>$key]);
             }
         },
-        'viewOptions'=>['title'=>$viewMsg, 'data-toggle'=>'tooltip'],
-        'updateOptions'=>['title'=>$updateMsg, 'data-toggle'=>'tooltip'],
+        'viewOptions'=>['title'=>$viewMsg, 'data-toggle'=>'tooltip', 'style'=>'display:none;'],
+        'updateOptions'=>['title'=>$updateMsg, 'data-toggle'=>'tooltip', 'style'=>'display:none;'],
         'deleteOptions'=>['title'=>$deleteMsg, 'data-toggle'=>'tooltip'], 
     ],
 ];
 
 ?>
-
-<div class="row">
-    <div class="col-sm-6 col-xs-12">
-      
-    </div>
-    <!-- /.col -->
-    <div class="col-sm-6 col-xs-12">
-        <a href="<?= Url::to(['create'])?>" class="pull-right">
-            <div class="description-block border-right">
-                <span class="icon-button"><i class="ion ion-plus-circled"></i></span>
-                <h5 class="description-text">New Product</h5>
-            </div>
-         </a>
-      <!-- /.description-block -->
-    </div>
-</div>
 
 <div class="row">
     <div class="col-xs-12">
