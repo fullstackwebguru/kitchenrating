@@ -5,6 +5,7 @@ namespace backend\controllers\catalog;
 use Yii;
 use common\models\Category;
 use common\models\Product;
+use common\models\ProductImage;
 use common\models\Store;
 use backend\models\ProductSearch;
 use yii\web\Controller;
@@ -14,6 +15,8 @@ use yii\helpers\Json;
 
 use yii\helpers\Html;
 use kartik\detail\DetailView;
+use yii\web\UploadedFile;
+use yii\helpers\Url;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -84,9 +87,7 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
-
         $model = $this->findModel($id);
-
         if (Yii::$app->request->isAjax && Yii::$app->request->post('kvdelete')) {
             $this->findModel($id)->delete();
 
@@ -124,6 +125,62 @@ class ProductController extends Controller
     }
 
     /**
+     * Detach Product Image  from Product
+     * @param integer $id
+     * @param integer $imageId
+     * @return mixed
+     */
+    public function actionDetach($id, $imageId) {
+        $model = $this->findModel($id);
+
+        $imageModel = ProductImage::findOne($imageId);
+
+        if ($imageModel) {
+            $imageModel->delete();
+        }
+
+        $output = [];
+        echo json_encode($output);
+    }
+
+    public function actionUpload($id)
+    {
+        $model = $this->findModel($id);
+
+        $output = [];
+
+        $allImages = [];
+        $allImageConfig = [];
+
+        $images = UploadedFile::getInstancesByName('temp_images');
+        if ($images) {
+            foreach($images as $image) {
+                $ext = end((explode(".", $image->name)));
+                $image_url = Yii::$app->security->generateRandomString().".{$ext}";
+                $path = Yii::getAlias('@mainUpload') . '/'. $image_url;
+                $image->saveAs($path);
+
+                $productImage = new ProductImage();
+                $productImage->product_id = $model->id;
+                $productImage->image_url = $image_url;
+
+                $productImage->save();
+
+                $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $image_url, '300x200', ['class' => 'file-preview-image']);
+                $allImageConfig[] =[   
+                        'caption' => 'Image',
+                        'url' => Url::toRoute(['detach', 'id'=>$model->id, 'imageId' => $productImage->id])
+                ];
+            }
+            
+        }
+
+        $output['initialPreview'] = $allImages;
+        $output['initialPreviewConfig'] = $allImageConfig;    
+        echo json_encode($output);
+    }
+
+    /**
      * Creates a new Product model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -135,6 +192,9 @@ class ProductController extends Controller
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            // $model->temp_images = UploadedFile::getInstance($model, 'temp_images');
+            // $model->uploadImages();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

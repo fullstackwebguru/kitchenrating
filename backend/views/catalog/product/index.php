@@ -19,17 +19,18 @@ $deleteMsg = 'Delte Product';
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     [
-        'class'=>'kartik\grid\ExpandRowColumn',
-        'width'=>'50px',
-        'value'=>function ($model, $key, $index, $column) {
-            return GridView::ROW_COLLAPSED;
+        'vAlign'=>'middle',
+        'width'=>'80px',
+        'format' => 'raw',
+        'value'=>function ($model, $key, $index, $widget) { 
+
+            $pms = $model->productImages;
+            if ($pms & count($pms) > 0) {
+                return Yii::$app->imageCache->img('@mainUpload/' . $pms[0]->image_url, '80x80', ['class' => 'file-preview-image']);
+            } else {
+                return "";
+            }
         },
-        'detail'=>function ($model, $key, $index, $column) {
-            // return Yii::$app->controller->renderPartial('_expand-row-details', ['model'=>$model]);
-            return "";
-        },
-        'headerOptions'=>['class'=>'kartik-sheet-style'] ,
-        'expandOneOnly'=>true
     ],
     [
         'class' => 'kartik\grid\EditableColumn',

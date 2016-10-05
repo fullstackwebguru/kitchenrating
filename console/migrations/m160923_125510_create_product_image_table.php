@@ -21,6 +21,7 @@ class m160923_125510_create_product_image_table extends Migration
         $this->createTable('{{%product_image}}', [
             'id' => $this->primaryKey(11),
             'product_id' => $this->integer(11),
+            'image_url' => $this->string(255),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ],$tableOptions);

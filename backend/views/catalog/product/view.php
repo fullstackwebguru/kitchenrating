@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use kartik\markdown\Markdown;
 use kartik\markdown\MarkdownEditor;
+use kartik\widgets\FileInput;
 
 
 /* @var $this yii\web\View */
@@ -110,6 +111,16 @@ $attributes = [
     ]
 ];
 
+$allImages = [];
+$allImageConfig = [];
+
+foreach($model->productImages as $pImage) {
+    $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $pImage->image_url, '300x200', ['class' => 'file-preview-image']);
+    $allImageConfig[] =[   
+            'caption' => 'Image',
+            'url' => Url::toRoute(['detach', 'id'=>$model->id, 'imageId' => $pImage->id])
+    ];    
+}
 
 ?>
 
@@ -136,3 +147,33 @@ $attributes = [
     </div>
 
 </div>
+
+<div class="row">
+    <div class="col-xs-12">
+    <div class="box-header with-border">
+        <h3 class="box-title">Product Images</h3>
+
+        <?= FileInput::widget([
+            'name'=>'temp_images[]',
+            'options' => [
+                'multiple' => true,
+                'id' => 'input-888'
+            ],
+            'pluginOptions' => [
+                'uploadAsync' =>  false,
+                'maxFileCount' =>  10,
+                'initialPreview' => $allImages,
+                'initialPreviewConfig' => $allImageConfig,
+                'initialPreviewAsData' => false,
+                'overwriteInitial' => false,
+                'showClose' => false,
+                'showBrowse' => true,
+                'showRemove' => false,
+                'showUpload' => false,
+                'previewFileType' => 'image',
+                'uploadUrl' => Url::toRoute(['upload', 'id'=>$model->id]),
+            ]
+        ]) ?>
+    </div>
+    </div>
+<div>

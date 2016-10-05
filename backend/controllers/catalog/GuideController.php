@@ -14,6 +14,7 @@ use yii\helpers\Json;
 use kartik\detail\DetailView;
 use yii\web\UploadedFile;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * GuideController implements the CRUD actions for Guide model.
@@ -103,6 +104,15 @@ class GuideController extends Controller
             $image->saveAs($path);
 
             $model->save();
+
+            $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '200x150', ['class' => 'file-preview-image']);
+            $allImageConfig[] =[   
+                    'caption' => 'Current Image',
+                    'url' => Url::toRoute(['detach', 'id'=>$model->id])
+            ];
+
+            $output['initialPreview'] = $allImages;
+            $output['initialPreviewConfig'] = $allImageConfig;
         }
 
         echo json_encode($output);

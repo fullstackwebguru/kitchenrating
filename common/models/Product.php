@@ -33,6 +33,8 @@ class Product extends ActiveRecord
     const STATUS_DELETED = false;
     const STATUS_ACTIVE = true;
 
+    public $temp_images;
+
     /**
      * @inheritdoc
      */
@@ -71,6 +73,7 @@ class Product extends ActiveRecord
             [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['store_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'boolean'],
+            // /[['temp_images'], 'file','skipOnEmpty' => true, 'extensions'=>'jpg, gif, png'],
         ];
     }
 

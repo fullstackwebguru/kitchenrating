@@ -23,7 +23,7 @@ class ProductImage extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'product_image';
+        return '{{product_image}}';
     }
 
     /**
@@ -56,7 +56,7 @@ class ProductImage extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'product_id' => 'Product ID',
-            'image_url' => 'Image'
+            'image_url' => 'Image',
         ];
     }
 

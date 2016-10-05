@@ -83,6 +83,7 @@ class Guide extends ActiveRecord
             'title' => 'Title',
             'slug' => 'Slug',
             'image_url' => 'Image',
+            'temp_image' => 'Image',
             'description' => 'Description',
             'color' => 'Color',
             'status' => 'Status',
