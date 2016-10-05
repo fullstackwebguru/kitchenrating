@@ -10,6 +10,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property integer $id
  * @property integer $product_id
+ * @property string  $image_url
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -43,6 +44,7 @@ class ProductImage extends \yii\db\ActiveRecord
         return [
             [['product_id'], 'integer'],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
+            [['image_url'], 'string']
         ];
     }
 
@@ -53,7 +55,8 @@ class ProductImage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID'
+            'product_id' => 'Product ID',
+            'image_url' => 'Image'
         ];
     }
 

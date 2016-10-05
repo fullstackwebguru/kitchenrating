@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
 
+use yii\helpers\Html;
 use kartik\detail\DetailView;
 
 /**

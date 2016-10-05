@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b5abab8e2d6a9bc47dac03ffc20c983f",
-    "content-hash": "41718b4e47f69e107e9374d867622a7a",
+    "hash": "f9d5ac3cdd60235bfef508a6f21f3a20",
+    "content-hash": "a6b2957c24333991b4f253c758e502f2",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -2040,6 +2040,45 @@
                 "yii2"
             ],
             "time": "2015-12-05 10:37:16"
+        },
+        {
+            "name": "letyii/yii2-imagecache",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/letyii/yii2-imagecache.git",
+                "reference": "2be3c36ecd17afd14f9183839114513857f72ca5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/letyii/yii2-imagecache/zipball/2be3c36ecd17afd14f9183839114513857f72ca5",
+                "reference": "2be3c36ecd17afd14f9183839114513857f72ca5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-imagine": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "letyii\\imagecache\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Image cache for yii2",
+            "homepage": "https://github.com/letyii/yii2-imagecache",
+            "keywords": [
+                "cache",
+                "image",
+                "thumbnail",
+                "yii2"
+            ],
+            "time": "2015-09-01 02:45:08"
         },
         {
             "name": "michelf/php-markdown",

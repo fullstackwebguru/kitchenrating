@@ -24,6 +24,7 @@ class m161004_030720_create_guide_table extends Migration
             'title' => $this->string(255)->notNull(),
             'slug' => $this->string(255),
             'description' => $this->text(),
+            'image_url' => $this->string(255),
             'color' => $this->string(11),
             'status' => $this->boolean()->notNull()->defaultValue(true),
             'created_at' => $this->integer()->notNull(),

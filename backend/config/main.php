@@ -55,15 +55,18 @@ return [
             'rules' => [
             ],
         ],
-        
        'assetManager' => [
-        'bundles' => [
-            'assets\AppAsset' => [
-                'skin' => 'skin-black',
+            'bundles' => [
+                'assets\AppAsset' => [
+                    'skin' => 'skin-black',
+                ],
             ],
         ],
-    ],
-
+        'imageCache' => [
+            'class' => 'letyii\imagecache\imageCache',
+            'cachePath' => '@app/web/uploads',
+            'cacheUrl' => '@web/uploads',
+        ],
     ],
     'params' => $params,
 ];

@@ -14,6 +14,7 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $category_id
  * @property string $title
  * @property string $slug
+ * @property string $image_url
  * @property string $description
  * @property integer $status
  * @property string $color
@@ -27,6 +28,8 @@ class Guide extends ActiveRecord
 {
     const STATUS_DELETED = false;
     const STATUS_ACTIVE = true;
+
+    public $temp_image;
 
     /**
      * @inheritdoc
@@ -59,12 +62,13 @@ class Guide extends ActiveRecord
         return [
             [['category_id'], 'integer'],
             [['title', 'category_id'], 'required'],
-            [['description','color',], 'string'],
+            [['description','color','image_url'], 'string'],
             [['title', 'slug'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'boolean'],
-
+            [['temp_image'], 'safe'],
+            [['temp_image'], 'file', 'extensions'=>'jpg, gif, png'],
         ];
     }
 
@@ -78,6 +82,7 @@ class Guide extends ActiveRecord
             'category_id' => 'Category',
             'title' => 'Title',
             'slug' => 'Slug',
+            'image_url' => 'Image',
             'description' => 'Description',
             'color' => 'Color',
             'status' => 'Status',

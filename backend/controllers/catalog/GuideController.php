@@ -12,6 +12,8 @@ use yii\filters\VerbFilter;
 use yii\helpers\Json;
 
 use kartik\detail\DetailView;
+use yii\web\UploadedFile;
+use yii\helpers\Html;
 
 /**
  * GuideController implements the CRUD actions for Guide model.
@@ -74,13 +76,45 @@ class GuideController extends Controller
     }
 
     /**
+     * Detach image from Guide
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetach($id) {
+        $model = $this->findModel($id);
+        $output = [];
+        $model->image_url = '';
+        $model->save();
+        echo json_encode($output);
+    }
+
+    public function actionUpload($id)
+    {
+        $model = $this->findModel($id);
+
+        $output = [];
+
+        $image = UploadedFile::getInstanceByName('new_guide_image');
+        if ($image) {
+
+            $ext = end((explode(".", $image->name)));
+            $model->image_url = Yii::$app->security->generateRandomString().".{$ext}";
+            $path = Yii::getAlias('@mainUpload') . '/'. $model->image_url;
+            $image->saveAs($path);
+
+            $model->save();
+        }
+
+        echo json_encode($output);
+    }
+
+    /**
      * Displays a single Guide model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-
         $model = $this->findModel($id);
 
         if (Yii::$app->request->isAjax && Yii::$app->request->post('kvdelete')) {
@@ -127,14 +161,25 @@ class GuideController extends Controller
         $categories = Category::find()->orderBy('title')->asArray()->all();
         $model = new Guide();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'categories' => $categories,
-            ]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $image = UploadedFile::getInstance($model, 'temp_image');
+            if ($image) {
+
+                $ext = end((explode(".", $image->name)));
+                $model->image_url = Yii::$app->security->generateRandomString().".{$ext}";
+                $path = Yii::getAlias('@mainUpload') . '/'. $model->image_url;
+                $image->saveAs($path);
+            }
+            
+            if ($model->save())  {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('create', [
+            'model' => $model,
+            'categories' => $categories,
+        ]);
     }
 
     /**

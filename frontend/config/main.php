@@ -46,6 +46,11 @@ return [
             ],
         ],
         */
+       'imageCache' => [
+            'class' => 'letyii\imagecache\imageCache',
+            'cachePath' => '@app/uploads/cache',
+            'cacheUrl' => '@web/uploads/cache',
+        ],
     ],
     'params' => $params,
 ];

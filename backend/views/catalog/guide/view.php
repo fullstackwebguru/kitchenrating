@@ -6,13 +6,14 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use kartik\markdown\Markdown;
 use kartik\markdown\MarkdownEditor;
+use kartik\widgets\FileInput;
 
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Guides', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $attributes = [
@@ -83,6 +84,13 @@ $attributes = [
 ];
 
 
+//images
+
+$allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '200x150', ['class' => 'file-preview-image']);
+$allImageConfig[] =[   
+        'caption' => 'Current Image',
+        'url' => Url::toRoute(['detach', 'id'=>$model->id])
+];
 ?>
 
 <div class="row">
@@ -105,5 +113,34 @@ $attributes = [
     ]);?>
 
     </div>
-
 </div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+    <div class="box-header with-border">
+        <h3 class="box-title">Guide Image</h3>
+
+        <?= FileInput::widget([
+            'name'=>'new_guide_image',
+            'options' => [
+                'id' => 'input-888'
+            ],
+            'pluginOptions' => [
+                'uploadAsync' =>  false,
+                'maxFileCount' =>  1,
+                'initialPreview' => $allImages,
+                'initialPreviewConfig' => $allImageConfig,
+                'initialPreviewAsData' => false,
+                'overwriteInitial' => true,
+                'autoReplace' => true,
+                'showClose' => false,
+                'showBrowse' => true,
+                'showRemove' => false,
+                'previewFileType' => 'image',
+                'uploadUrl' => Url::toRoute(['upload', 'id'=>$model->id]),
+            ]
+        ]) ?>
+    </div>
+    </div>
+<div>

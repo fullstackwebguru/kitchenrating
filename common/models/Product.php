@@ -71,7 +71,6 @@ class Product extends ActiveRecord
             [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['store_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'boolean'],
-
         ];
     }
 
@@ -120,4 +119,23 @@ class Product extends ActiveRecord
     {
         return $this->hasMany(ProductImage::className(), ['product_id' => 'id']);
     }
+
+    // public function uploadImages() {
+    //     if ($this->validate()) {
+    //         foreach($this->temp_images as $image) {
+    //             $ext = end((explode(".", $image->name)));
+    //             $image_url = Yii::$app->security->generateRandomString().".{$ext}";
+    //             $path = Yii::getAlias('@mainUpload') . '/'. $image_url;
+    //             $image->saveAs($path);
+
+    //             $productImage = new ProductImage();
+    //             $productImage->product_id = $this->id;
+    //             $productImage->image_url = $image_url;
+
+    //             $productImage->save();
+    //         }
+    //         return true;
+    //     }
+    //     return false;
+    // }
 }

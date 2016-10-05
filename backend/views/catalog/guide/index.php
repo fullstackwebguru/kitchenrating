@@ -19,6 +19,15 @@ $deleteMsg = 'Delte Guide';
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     [
+        'attribute'=>'image_url', 
+        'vAlign'=>'middle',
+        'width'=>'80px',
+        'format' => 'raw',
+        'value'=>function ($model, $key, $index, $widget) { 
+            return Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '80x80', ['class' => 'file-preview-image']);
+        },
+    ],
+    [
         'class' => 'kartik\grid\EditableColumn',
         'attribute' => 'title',
         'pageSummary' => 'Page Total',
