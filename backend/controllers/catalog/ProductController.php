@@ -160,13 +160,15 @@ class ProductController extends Controller
                 $path = Yii::getAlias('@mainUpload') . '/'. $image_url;
                 $image->saveAs($path);
 
+                list($width, $height) = getimagesize($path);
+
                 $productImage = new ProductImage();
                 $productImage->product_id = $model->id;
                 $productImage->image_url = $image_url;
 
                 $productImage->save();
 
-                $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $image_url, '300x200', ['class' => 'file-preview-image']);
+                $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $image_url, $width .'x' . $height, ['class' => 'file-preview-image']);
                 $allImageConfig[] =[   
                         'caption' => 'Image',
                         'url' => Url::toRoute(['detach', 'id'=>$model->id, 'imageId' => $productImage->id])
