@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use kartik\detail\DetailView;
 use yii\helpers\Url;
+use kartik\widgets\FileInput;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Category */
@@ -26,6 +28,19 @@ $attributes = [
     [
         'attribute'=>'title', 
         'value'=>$model->title
+    ],
+    [
+        'attribute'=>'popular', 
+        'label'=>'Popular?',
+        'format'=>'raw',
+        'value'=>$model->popular ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+        'type'=>DetailView::INPUT_SWITCH,
+        'widgetOptions' => [
+            'pluginOptions' => [
+                'onText' => 'Yes',
+                'offText' => 'No',
+            ]
+        ],
     ],
     [
         'attribute'=>'status', 
@@ -57,6 +72,17 @@ $attributes = [
     ]
 ];
 
+//images
+$allImages = [];
+$allImageConfig = [];
+
+if ($model->image_url) {
+    $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '200x150', ['class' => 'file-preview-image']);
+    $allImageConfig[] =[   
+            'caption' => 'Current Image',
+            'url' => Url::toRoute(['detach', 'id'=>$model->id])
+    ];    
+}
 
 ?>
 <div class="row">
@@ -81,3 +107,33 @@ $attributes = [
     </div>
 
 </div>
+
+<div class="row">
+    <div class="col-xs-12">
+    <div class="box-header with-border">
+        <h3 class="box-title">Category Image</h3>
+
+        <?= FileInput::widget([
+            'name'=>'new_category_image',
+            'options' => [
+                'id' => 'input-888'
+            ],
+            'pluginOptions' => [
+                'uploadAsync' =>  false,
+                'maxFileCount' =>  1,
+                'initialPreview' => $allImages,
+                'initialPreviewConfig' => $allImageConfig,
+                'initialPreviewAsData' => false,
+                'overwriteInitial' => true,
+                'autoReplace' => true,
+                'showClose' => false,
+                'showBrowse' => true,
+                'showRemove' => false,
+                'showUpload' => false,
+                'previewFileType' => 'image',
+                'uploadUrl' => Url::toRoute(['upload', 'id'=>$model->id]),
+            ]
+        ]) ?>
+    </div>
+    </div>
+<div>

@@ -22,6 +22,8 @@ class m160923_122418_create_category_table extends Migration
             'id' => $this->primaryKey(11),
             'parent_id' => $this->integer(11),
             'title' => $this->string(255)->notNull(),
+            'image_url' => $this->string(255),
+            'popular' => $this->boolean()->notNull()->defaultValue(false),
             'slug' => $this->string(255),
             'status' => $this->boolean()->notNull()->defaultValue(true),
             'color' => $this->string(11),

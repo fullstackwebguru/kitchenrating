@@ -13,6 +13,9 @@ use yii\helpers\Json;
 use yii\helpers\Html;
 use kartik\detail\DetailView;
 
+use yii\web\UploadedFile;
+use yii\helpers\Url;
+
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
@@ -69,6 +72,48 @@ class CategoryController extends Controller
     }
 
     /**
+     * Detach image from Category
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetach($id) {
+        $model = $this->findModel($id);
+        $output = [];
+        $model->image_url = '';
+        $model->save();
+        echo json_encode($output);
+    }
+
+    public function actionUpload($id)
+    {
+        $model = $this->findModel($id);
+
+        $output = [];
+
+        $image = UploadedFile::getInstanceByName('new_category_image');
+        if ($image) {
+
+            $ext = end((explode(".", $image->name)));
+            $model->image_url = Yii::$app->security->generateRandomString().".{$ext}";
+            $path = Yii::getAlias('@mainUpload') . '/'. $model->image_url;
+            $image->saveAs($path);
+
+            $model->save();
+
+            $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '200x150', ['class' => 'file-preview-image']);
+            $allImageConfig[] =[   
+                    'caption' => 'Current Image',
+                    'url' => Url::toRoute(['detach', 'id'=>$model->id])
+            ];
+
+            $output['initialPreview'] = $allImages;
+            $output['initialPreviewConfig'] = $allImageConfig;
+        }
+
+        echo json_encode($output);
+    }
+
+    /**
      * Displays a single Category model.
      * @param integer $id
      * @return mixed
@@ -117,13 +162,24 @@ class CategoryController extends Controller
     {
         $model = new Category();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $image = UploadedFile::getInstance($model, 'temp_image');
+            if ($image) {
+
+                $ext = end((explode(".", $image->name)));
+                $model->image_url = Yii::$app->security->generateRandomString().".{$ext}";
+                $path = Yii::getAlias('@mainUpload') . '/'. $model->image_url;
+                $image->saveAs($path);
+            }
+            
+            if ($model->save())  {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**

@@ -4,10 +4,8 @@ namespace backend\controllers\theme;
 
 use Yii;
 use common\models\Category;
-use common\models\Product;
-use common\models\ProductImage;
 use common\models\Store;
-use backend\models\ProductSearch;
+use backend\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -48,12 +46,12 @@ class PopularController extends Controller
     {
 
         if (Yii::$app->request->isAjax && Yii::$app->request->post('hasEditable')) {
-            $productId = Yii::$app->request->post('editableKey');
-            $model = $this->findModel($productId);
+            $categoryId = Yii::$app->request->post('editableKey');
+            $model = $this->findModel($categoryId);
 
             $out = ['output'=>'', 'message'=>''];
-            $posted = current(Yii::$app->request->post('Product'));
-            $post = ['Product' => $posted];
+            $posted = current(Yii::$app->request->post('Category'));
+            $post = ['Category' => $posted];
 
             if ($model->load($post) && $model->save()) {
                 $out['message'] = '';
@@ -64,19 +62,13 @@ class PopularController extends Controller
             echo Json::encode($out);
             return;
         } else {
-
-            $categories = Category::find()->orderBy('title')->asArray()->all();
-            $stores = Store::find()->orderBy('title')->asArray()->all();
-
-            $searchModel = new ProductSearch();
+            $searchModel = new CategorySearch();
             $searchModel->setPopular();
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
                 'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'categories' => $categories,
-                'stores' => $stores
+                'dataProvider' => $dataProvider
             ]);
         }
     }
@@ -98,15 +90,15 @@ class PopularController extends Controller
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Category::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

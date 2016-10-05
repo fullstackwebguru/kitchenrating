@@ -75,13 +75,6 @@ $gridColumns = [
     ],
     [
         'class'=>'kartik\grid\BooleanColumn',
-        'attribute'=>'popular', 
-        'vAlign'=>'middle',
-        'trueLabel' => 'Yes',
-        'falseLabel' => 'No',
-    ],
-    [
-        'class'=>'kartik\grid\BooleanColumn',
         'attribute'=>'featured', 
         'vAlign'=>'middle',
         'trueLabel' => 'Yes',

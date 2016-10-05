@@ -12,13 +12,15 @@ use common\models\Category;
  */
 class CategorySearch extends Category
 {
+    public $defaultSearch = [];
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'parent_id', 'status', 'popular', 'created_at', 'updated_at'], 'integer'],
             [['title', 'slug'], 'safe'],
         ];
     }
@@ -30,6 +32,10 @@ class CategorySearch extends Category
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    public function setPopular() {
+        $this->defaultSearch['popular'] = true;
     }
 
     /**
@@ -58,13 +64,19 @@ class CategorySearch extends Category
         }
         
         // grid filtering conditions
-        $query->andFilterWhere([
+        $where = [
             'id' => $this->id,
             'parent_id' => $this->parent_id,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ]);
+        ];
+
+        foreach($this->defaultSearch as $key => $value) {
+            $where[$key] = $value;
+        }
+
+        $query->andFilterWhere($where);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'slug', $this->slug]);

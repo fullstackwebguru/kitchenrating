@@ -92,7 +92,6 @@ class FeaturedController extends Controller
         $model = $this->findModel($id);
 
         $model->featured = false;
-
         $model->save();
 
         return $this->redirect(['index']);

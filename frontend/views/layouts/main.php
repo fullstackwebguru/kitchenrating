@@ -46,7 +46,12 @@ AppAsset::register($this);
     <i class="fa fa-twitter"></i>
   </a>
 </div>
+
 <div class="site_wraper">
+
+    <?= $this->render(
+        'header.php'
+    ) ?>
 
     <?= $content ?>
 

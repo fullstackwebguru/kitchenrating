@@ -3,9 +3,9 @@
 use kartik\widgets\ActiveForm;
 use kartik\builder\Form;
 use yii\helpers\Html;
+use kartik\widgets\FileInput;
 
-
-$form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
+$form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL,'options' => ['enctype'=>'multipart/form-data']]);
 echo Form::widget([
     'model'=>$model,
     'form'=>$form,
@@ -14,6 +14,15 @@ echo Form::widget([
         'title'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter title...']]
     ]
 ]);
+
+echo $form->field($model, 'temp_image')->widget(
+    FileInput::classname(), 
+    [  
+        'options' => [
+            'accept' => 'image/*'
+        ],
+    ]
+);
 
 echo Form::widget([       // 3 column layout
     'model'=>$model,

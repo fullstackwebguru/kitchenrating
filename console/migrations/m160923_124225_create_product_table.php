@@ -30,7 +30,6 @@ class m160923_124225_create_product_table extends Migration
             'num_rating' => $this->integer(11)->notNull(),
             'color' => $this->string(11),
             'featured' => $this->boolean()->notNull()->defaultValue(false),
-            'popular' => $this->boolean()->notNull()->defaultValue(false),
             'status' => $this->boolean()->notNull()->defaultValue(true),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),

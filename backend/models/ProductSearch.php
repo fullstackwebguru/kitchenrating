@@ -21,7 +21,7 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id', 'category_id', 'store_id','num_rating', 'status','featured','popular','created_at', 'updated_at'], 'integer'],
+            [['id', 'category_id', 'store_id','num_rating', 'status','featured','created_at', 'updated_at'], 'integer'],
             [['title', 'slug', 'description'], 'safe'],
             [['rating'], 'number'],
         ];
@@ -38,10 +38,6 @@ class ProductSearch extends Product
 
     public function setFeatured() {
         $this->defaultSearch['featured'] = true;
-    }
-
-    public function setPopular() {
-        $this->defaultSearch['popular'] = true;
     }
 
     /**

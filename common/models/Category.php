@@ -14,6 +14,8 @@ use yii\db\ActiveRecord;
  * @property integer $parent_id
  * @property string $title
  * @property string $slug
+ * @property string $image_url
+ * @property integer $popular 
  * @property integer $status
  * @property string $color
  * @property integer $created_at
@@ -28,6 +30,8 @@ class Category extends ActiveRecord
 {
     const STATUS_DELETED = false;
     const STATUS_ACTIVE = true;
+
+    public $temp_image;
 
     /**
      * @inheritdoc
@@ -62,7 +66,9 @@ class Category extends ActiveRecord
             [['title','status'], 'required'],
             [['title', 'slug', 'color'], 'string', 'max' => 255],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
-            ['status', 'boolean'],
+            [['status', 'popular'], 'boolean'],
+            [['temp_image'], 'safe'],
+            [['temp_image'], 'file', 'extensions'=>'jpg, gif, png'],
         ];
     }
 
@@ -78,6 +84,8 @@ class Category extends ActiveRecord
             'slug' => 'Slug',
             'color' => 'Color',
             'status' => 'Status',
+            'image_url' => 'Image',
+            'temp_image' => 'Image',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
