@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-use frontend\widgets\Featured;
+use frontend\widgets\LatestGuide;
 
 $this->title = 'Kitchen Rating';
 ?>
@@ -19,9 +19,7 @@ $this->title = 'Kitchen Rating';
         'popularTop10' => $popularTop10
     ]) ?>
 
-    <?= $this->render('_latest_guides', [
-        'guides' => $guides
-    ]) ?>
+    <?= LatestGuide::widget(); ?>
 
 <div class="subscriber_section">
   <div class="container">

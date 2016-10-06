@@ -23,7 +23,7 @@ use frontend\widgets\Rating;
               <span><?= $product->sku?></span>
               <div class="media">
                 <div class="media-left">
-                  <a href="">
+                  <a href="<?=Url::toRoute($product->getRoute())?>">
                     <span>Deal</span>
                     <?= Yii::$app->imageCache->img('@mainUpload/' . $product->getMainImage()->image_url, '130x130', ['class' => 'file-preview-image']) ?>
                   </a>
@@ -45,6 +45,7 @@ use frontend\widgets\Rating;
         <!-- <div class="clearfix text-center ">
           <a href="#" class="btn btn-default btn_common">SHOW MORE</a>
         </div> -->
+        </div>
       </div>
     </div>
   </div>

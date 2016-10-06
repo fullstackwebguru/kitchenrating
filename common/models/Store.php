@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $title
+ * @property string $image_url
  *
  * @property Product[] $products
  */
@@ -40,7 +41,8 @@ class Store extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title'
+            'title' => 'Title',
+            'image_url' => 'Image'
         ];
     }
 

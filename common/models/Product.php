@@ -19,6 +19,10 @@ use yii\behaviors\SluggableBehavior;
  * @property double $rating
  * @property integer $store_id
  * @property integer $num_rating
+ * @property double $score
+ * @property integer $quality_level
+ * @property integer $price_level
+ * @property integer $trust_level
  * @property integer $status
  * @property string $color
  * @property string $meta_description
@@ -71,9 +75,12 @@ class Product extends ActiveRecord
         return [
             [['category_id', 'num_rating'], 'integer'],
             [['title', 'category_id', 'store_id', 'product_url', 'rating','num_rating', 'sku', 'meta_keywords', 'meta_description' ], 'required'],
+            [['quality_level', 'price_level', 'trust_level', 'score'], 'required'],
             [['description','color','product_url',], 'string'],
             [['rating'], 'number', 'max' => 5],
+            [['score'], 'number', 'max' => 10],
             [['title', 'sku', 'slug'], 'string', 'max' => 255],
+            [['quality_level', 'price_level', 'trust_level'], 'integer', 'min' => 0 ,  'max' => 100],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['store_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -98,6 +105,10 @@ class Product extends ActiveRecord
             'product_url' => 'Product Url',
             'rating' => 'Rating',
             'num_rating' => 'Num Rating',
+            'score' => 'Score',
+            'quality_level' => 'Quality',
+            'trust_level' => 'Trust In Brand',
+            'price_level' => 'Price',
             'color' => 'Color',
             'status' => 'Status',
             'meta_keywords' => 'SEO Keywords',

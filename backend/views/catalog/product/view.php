@@ -113,6 +113,27 @@ $attributes = [
     ],
     [
         'group'=>true,
+        'label'=>'Raking Info',
+        'rowOptions'=>['class'=>'info'],
+    ],
+    [
+        'attribute'=>'score', 
+        'value'=>$model->score
+    ],
+    [
+        'attribute'=>'price_level', 
+        'value'=>$model->price_level
+    ],
+    [
+        'attribute'=>'quality_level', 
+        'value'=>$model->quality_level
+    ],
+    [
+        'attribute'=>'trust_level', 
+        'value'=>$model->trust_level
+    ],
+    [
+        'group'=>true,
         'label'=>'SEO Information',
         'rowOptions'=>['class'=>'info']
     ],

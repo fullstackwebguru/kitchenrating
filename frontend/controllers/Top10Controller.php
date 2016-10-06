@@ -17,7 +17,7 @@ class Top10Controller extends Controller
     public function actionSlug($slug) 
     {
         $model = $this->findModelBySlug($slug);
-        return $this->render('index', [
+        return $this->render('view', [
             'model' => $model
         ]);   
     }

@@ -8,7 +8,6 @@ use kartik\markdown\MarkdownEditor;
 use kartik\widgets\FileInput;
 
 
-
 $form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL,'options' => ['enctype'=>'multipart/form-data']]);
 
 echo Form::widget([
@@ -81,11 +80,38 @@ echo Form::widget([       // 3 column layout
         ],
         'num_rating'=>[
             'type'=>Form::INPUT_TEXT
+        ]
+    ]
+]);
+
+
+
+echo Form::widget([       // 3 column layout
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=>4,
+    'attributes'=>[
+        'price_level'=>[
+            'type'=>Form::INPUT_TEXT, 
+            'options'=>['placeholder'=>'Enter price level...']
+        ],
+        'quality_level'=>[
+            'type'=>Form::INPUT_TEXT, 
+            'options'=>['placeholder'=>'Enter quality level...']
+        ],
+        'trust_level'=>[
+            'type'=>Form::INPUT_TEXT, 
+            'options'=>['placeholder'=>'Enter trust level...']
+        ],
+        'score'=>[
+            'type'=>Form::INPUT_TEXT, 
+            'options'=>['placeholder'=>'Enter score...']
         ],
     ]
 ]);
 
-echo Form::widget(
+
+echo Form::widget([
     'model'=>$model,
     'form'=>$form,
     'columns'=> 1,
@@ -127,20 +153,6 @@ echo Form::widget([       // 3 column layout
         ],
     ]
 ]);
-
-
-// echo $form->field($model, 'temp_images[]')->widget(
-//     FileInput::classname(), 
-//     [ 
-//         'options' => [
-//             'multiple' => true,
-//             'accept' => 'image/*'
-//         ],
-//         'pluginOptions' => [
-//             'maxFileCount' =>  4,
-//         ]
-//     ]
-// );
 
 ActiveForm::end();
 ?>

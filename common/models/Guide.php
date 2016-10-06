@@ -13,7 +13,7 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $id
  * @property integer $category_id
  * @property string $title
-  * @property string $author
+ * @property string $author
  * @property string $slug
  * @property string $image_url
  * @property string $description

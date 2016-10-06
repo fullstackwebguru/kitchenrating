@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	  <div class="bread_crumb">
 	    <ul>
 	      <li>
-	      	<?=  Html::a('Home',['/site']) ?>
+	      	<?=  Html::a('Home',['/']) ?>
 	      </li>
 	      <li><span>/</span></li>
 	      <li><strong>All guides</strong></li>
@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
 	        <a href="<?= Url::toRoute($guide->getRoute())?>" class="all_guides_list_single">
 	          <?= Yii::$app->imageCache->img('@mainUpload/' . $guide->image_url, '211x141', ['class' => 'file-preview-image']) ?>
 	          <div class="desc">
-	            <h2>Lorem Ipsum is a dummy</h2>
-	            <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata</p>
+	            <h2><?= $guide->title ?></h2>
+	            <p><?= $guide->meta_description ?></p>
 	            <div class="meta">
-	              <strong>John Doe</strong>
+	              <strong><?= $guide->author?></strong>
 	              <span>01.feb 2016.</span>
 	            </div>
 	          </div>

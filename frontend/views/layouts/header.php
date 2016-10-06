@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -22,14 +23,14 @@ use yii\helpers\Html;
             </form>
           </div>
         </div> -->
-        <a href="#" class="navbar-brand top_logo">
+        <a href="<?=Url::toRoute(['/'])?>" class="navbar-brand top_logo">
           KitchenRatings
         </a>
       </div>
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav navbar-right rs_main_menu">
           <li>
-            <?=  Html::a('Home',['/site']) ?>
+            <?=  Html::a('Home',['/']) ?>
           </li>
           <li>
             <?=  Html::a('About',['/site/about']) ?>

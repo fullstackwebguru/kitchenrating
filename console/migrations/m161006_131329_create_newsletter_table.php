@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation for table `store`.
+ * Handles the creation for table `newsletter`.
  */
-class m161003_185755_create_product_store_table extends Migration
+class m161006_131329_create_newsletter_table extends Migration
 {
     /**
      * @inheritdoc
@@ -18,13 +18,12 @@ class m161003_185755_create_product_store_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%store}}', [
+        $this->createTable('{{%newsletter}}', [
             'id' => $this->primaryKey(11),
-            'title' => $this->string(255)->notNull(),
-            'image_url' => $this->string(255)
+            'email' => $this->string(255)->notNull(),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
         ],$tableOptions);
-
-        $this->addForeignKey('fk-product-store_id-store-id', '{{%product}}', 'store_id', '{{%store}}', 'id', 'RESTRICT');
     }
 
     /**
@@ -32,7 +31,6 @@ class m161003_185755_create_product_store_table extends Migration
      */
     public function down()
     {
-        $this->dropForeignKey('fk-product-store_id-store-id');
-        $this->dropTable('{{%store}}');
+        $this->dropTable('{{%newsletter}}');
     }
 }

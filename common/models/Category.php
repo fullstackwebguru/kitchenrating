@@ -28,6 +28,7 @@ use yii\db\ActiveRecord;
  * @property Category $parent
  * @property Category[] $categories
  * @property Product[] $products
+ * @property Product[] $top10Products
  */
 
 class Category extends ActiveRecord
@@ -132,6 +133,10 @@ class Category extends ActiveRecord
     public static function findByCategorytitle($title)
     {
         return static::findOne(['title' => $title, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public function getTop10Products() {
+        return $this->products;
     }
 
     /**
