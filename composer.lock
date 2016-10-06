@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f9d5ac3cdd60235bfef508a6f21f3a20",
-    "content-hash": "a6b2957c24333991b4f253c758e502f2",
+    "hash": "97b24b160ebad61780552bd3dd794210",
+    "content-hash": "4685ccee5f8bc9f32a216a9ef41d8141",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -376,6 +376,62 @@
                 "html"
             ],
             "time": "2016-07-16 12:58:58"
+        },
+        {
+            "name": "fxp/composer-asset-plugin",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fxpio/composer-asset-plugin.git",
+                "reference": "d7d189e8ffac26a2e39e26a9c75e1fc5c2e2b98d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fxpio/composer-asset-plugin/zipball/d7d189e8ffac26a2e39e26a9c75e1fc5c2e2b98d",
+                "reference": "d7d189e8ffac26a2e39e26a9c75e1fc5c2e2b98d",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Fxp\\Composer\\AssetPlugin\\FxpAssetPlugin",
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fxp\\Composer\\AssetPlugin\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Pluchino",
+                    "email": "francois.pluchino@gmail.com"
+                }
+            ],
+            "description": "NPM/Bower Dependency Manager for Composer",
+            "homepage": "https://github.com/fxpio/composer-asset-plugin",
+            "keywords": [
+                "asset",
+                "bower",
+                "composer",
+                "dependency manager",
+                "nodejs",
+                "npm",
+                "package"
+            ],
+            "time": "2016-08-03 07:44:07"
         },
         {
             "name": "imagine/imagine",
@@ -2946,7 +3002,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "ext-gd": "*"
     },
     "platform-dev": []
 }

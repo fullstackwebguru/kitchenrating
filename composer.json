@@ -15,6 +15,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
+        "fxp/composer-asset-plugin" : "*",
+        "ext-gd" : "*",
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-jui": "~2.0.0",
         "yiisoft/yii2-bootstrap": "*",
