@@ -52,6 +52,15 @@ echo Form::widget([
     'form'=>$form,
     'columns'=> 1,
     'attributes'=>[       //  column layout
+        'sku'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter sku...']]
+    ]
+]);
+
+echo Form::widget([
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=> 1,
+    'attributes'=>[       //  column layout
         'store_id'=>[
             'type'=>Form::INPUT_WIDGET, 
             'widgetClass'=>'\kartik\widgets\Select2', 
@@ -73,6 +82,24 @@ echo Form::widget([       // 3 column layout
         'num_rating'=>[
             'type'=>Form::INPUT_TEXT
         ],
+    ]
+]);
+
+echo Form::widget(
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=> 1,
+    'attributes'=>[       //  column layout
+        'meta_description'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter description for SEO...']]
+    ]
+]);
+
+echo Form::widget([
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=> 1,
+    'attributes'=>[       //  column layout
+        'meta_keywords'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter keywords for SEO...']]
     ]
 ]);
    

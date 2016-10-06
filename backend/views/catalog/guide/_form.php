@@ -35,6 +35,15 @@ echo Form::widget([
     ]
 ]);
 
+echo Form::widget([
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=> 1,
+    'attributes'=>[       //  column layout
+        'author'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter Author...']]
+    ]
+]);
+
 echo $form->field($model, 'temp_image')->widget(
     FileInput::classname(), 
     [  
@@ -48,6 +57,24 @@ echo $form->field($model, 'description')->widget(
     MarkdownEditor::classname(), 
     ['height' => 300, 'encodeLabels' => false]
 );
+
+echo Form::widget(
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=> 1,
+    'attributes'=>[       //  column layout
+        'meta_description'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter description for SEO...']]
+    ]
+]);
+
+echo Form::widget([
+    'model'=>$model,
+    'form'=>$form,
+    'columns'=> 1,
+    'attributes'=>[       //  column layout
+        'meta_keywords'=>['type'=>Form::INPUT_TEXT, 'options'=>['placeholder'=>'Enter keywords for SEO...']]
+    ]
+]);
    
 echo Form::widget([       // 3 column layout
     'model'=>$model,

@@ -32,6 +32,10 @@ $attributes = [
         'value'=>$model->title
     ],
     [
+        'attribute'=>'author', 
+        'value'=>$model->author
+    ],
+    [
         'attribute'=>'category_id',
         'format'=>'raw',
         'value'=>Html::a($model->category->title,  
@@ -80,6 +84,14 @@ $attributes = [
     [
         'attribute'=>'slug', 
         'value'=>$model->slug
+    ],
+    [
+        'attribute'=>'meta_keywords', 
+        'value'=>$model->meta_keywords
+    ],
+    [
+        'attribute'=>'meta_description', 
+        'value'=>$model->meta_description
     ]
 ];
 

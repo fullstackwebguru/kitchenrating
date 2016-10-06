@@ -16,8 +16,12 @@ use yii\db\ActiveRecord;
  * @property string $slug
  * @property string $image_url
  * @property integer $popular 
+ * @property double $rating
+ * @property integer $num_rating
  * @property integer $status
  * @property string $color
+ * @property string $meta_description
+ * @property string $meta_keywords
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -51,7 +55,8 @@ class Category extends ActiveRecord
             [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
-                'slugAttribute' => 'slug'
+                'slugAttribute' => 'slug',
+                'ensureUnique' => true,
             ],
         ];
     }
@@ -63,7 +68,8 @@ class Category extends ActiveRecord
     {
         return [
             [['parent_id'], 'integer'],
-            [['title','status'], 'required'],
+            [['title','status','meta_keywords', 'meta_description'], 'required'],
+            [['rating'], 'number', 'max' => 5],
             [['title', 'slug', 'color'], 'string', 'max' => 255],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
             [['status', 'popular'], 'boolean'],
@@ -86,6 +92,8 @@ class Category extends ActiveRecord
             'status' => 'Status',
             'image_url' => 'Image',
             'temp_image' => 'Image',
+            'meta_keywords' => 'SEO Keywords',
+            'meta_description' => 'SEO description',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -124,5 +132,13 @@ class Category extends ActiveRecord
     public static function findByCategorytitle($title)
     {
         return static::findOne(['title' => $title, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * @return url
+     */
+    public function getRoute()
+    {
+        return ['top10/slug', 'slug' => $this->slug];
     }
 }

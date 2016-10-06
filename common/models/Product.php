@@ -13,6 +13,7 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $id
  * @property integer $category_id
  * @property string $title
+ * @property string $sku
  * @property string $slug
  * @property string $description
  * @property double $rating
@@ -20,6 +21,8 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $num_rating
  * @property integer $status
  * @property string $color
+ * @property string $meta_description
+ * @property string $meta_keywords
  * @property integer $featured
  * @property integer $created_at
  * @property integer $updated_at
@@ -54,7 +57,8 @@ class Product extends ActiveRecord
             [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
-                'slugAttribute' => 'slug'
+                'slugAttribute' => 'slug',
+                'ensureUnique' => true,
             ],
         ];
     }
@@ -66,10 +70,10 @@ class Product extends ActiveRecord
     {
         return [
             [['category_id', 'num_rating'], 'integer'],
-            [['title', 'category_id', 'store_id', 'product_url', 'rating','num_rating'], 'required'],
+            [['title', 'category_id', 'store_id', 'product_url', 'rating','num_rating', 'sku', 'meta_keywords', 'meta_description' ], 'required'],
             [['description','color','product_url',], 'string'],
-            [['rating'], 'number'],
-            [['title', 'slug'], 'string', 'max' => 255],
+            [['rating'], 'number', 'max' => 5],
+            [['title', 'sku', 'slug'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['store_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -87,6 +91,7 @@ class Product extends ActiveRecord
             'id' => 'ID',
             'category_id' => 'Category',
             'title' => 'Title',
+            'sku' => 'SKU',
             'slug' => 'Slug',
             'description' => 'Description',
             'store_id' => 'Store',
@@ -95,6 +100,8 @@ class Product extends ActiveRecord
             'num_rating' => 'Num Rating',
             'color' => 'Color',
             'status' => 'Status',
+            'meta_keywords' => 'SEO Keywords',
+            'meta_description' => 'SEO description',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -124,6 +131,23 @@ class Product extends ActiveRecord
         return $this->hasMany(ProductImage::className(), ['product_id' => 'id']);
     }
 
+    public function getMainImage()
+    {
+        if ($this->productImages && count($this->productImages)) {
+            return $this->productImages[0];
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * @return products
+     */
+    public static function findFeaturedProducts()
+    {
+        return static::find(['featured' => true]);
+    }
+
     // public function uploadImages() {
     //     if ($this->validate()) {
     //         foreach($this->temp_images as $image) {
@@ -142,4 +166,14 @@ class Product extends ActiveRecord
     //     }
     //     return false;
     // }
+    // 
+    
+    /**
+     * @return url
+     */
+    
+    public function getRoute()
+    {
+        return ['product/slug', 'slug' => $this->slug];
+    }
 }

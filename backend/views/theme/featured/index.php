@@ -35,6 +35,12 @@ $gridColumns = [
     [
         'attribute' => 'title',
         'vAlign'=>'middle',
+        'value'=>function ($model, $key, $index, $widget) { 
+            return Html::a($model->title,  
+                ['catalog/product/view', 'id'=>$model->id], 
+                ['title'=>'View product detail']);
+        },
+        'format'=>'raw'
     ],
     [
         'attribute'=>'category_id', 

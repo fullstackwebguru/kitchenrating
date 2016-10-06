@@ -9,23 +9,24 @@ use yii\helpers\Url;
 /* @var $searchModel backend\models\CategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Popular Categories';
 $this->params['breadcrumbs'][] = $this->title;
 
 $viewMsg = 'View Category Details';
 $updateMsg = 'Update Category Details';
-$deleteMsg = 'Delte Category';
+$deleteMsg = 'Remove Category from Popular List';
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     [
-        'class' => 'kartik\grid\EditableColumn',
         'attribute' => 'title',
-        'pageSummary' => 'Page Total',
         'vAlign'=>'middle',
-        'headerOptions'=>['class'=>'kv-sticky-column'],
-        'contentOptions'=>['class'=>'kv-sticky-column'],
-        'editableOptions'=>['header'=>'Title']
+        'value'=>function ($model, $key, $index, $widget) { 
+            return Html::a($model->title,  
+                ['catalog/category/view', 'id'=>$model->id], 
+                ['title'=>'View category detail']);
+        },
+        'format'=>'raw'
     ],
     [
         'class'=>'kartik\grid\BooleanColumn',
@@ -50,22 +51,6 @@ $gridColumns = [
 ];
 
 ?>
-
-<div class="row">
-    <div class="col-sm-6 col-xs-12">
-      
-    </div>
-    <!-- /.col -->
-    <div class="col-sm-6 col-xs-12">
-        <a href="<?= Url::to(['create'])?>" class="pull-right">
-            <div class="description-block border-right">
-                <span class="icon-button"><i class="ion ion-plus-circled"></i></span>
-                <h5 class="description-text">New Category</h5>
-            </div>
-         </a>
-      <!-- /.description-block -->
-    </div>
-</div>
 
 <div class="row">
     <div class="col-xs-12">

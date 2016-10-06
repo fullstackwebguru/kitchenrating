@@ -38,18 +38,20 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'top10/<slug>' => 'top10/slug',
+                'product/<slug>' => 'product/slug',
+                'guide/<slug>' => 'guide/slug',
             ],
         ],
-        */
        'imageCache' => [
             'class' => 'letyii\imagecache\imageCache',
-            'cachePath' => '@app/uploads/cache',
-            'cacheUrl' => '@web/uploads/cache',
+            'cachePath' => '@app/web/uploads',
+            'cacheUrl' => '@web/uploads',
         ],
     ],
     'params' => $params,

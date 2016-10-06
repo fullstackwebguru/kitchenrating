@@ -13,11 +13,14 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $id
  * @property integer $category_id
  * @property string $title
+  * @property string $author
  * @property string $slug
  * @property string $image_url
  * @property string $description
  * @property integer $status
  * @property string $color
+ * @property string $meta_description
+ * @property string $meta_keywords
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -49,7 +52,8 @@ class Guide extends ActiveRecord
             [
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'title',
-                'slugAttribute' => 'slug'
+                'slugAttribute' => 'slug',
+                'ensureUnique' => true,
             ],
         ];
     }
@@ -61,9 +65,9 @@ class Guide extends ActiveRecord
     {
         return [
             [['category_id'], 'integer'],
-            [['title', 'category_id'], 'required'],
+            [['title', 'category_id', 'author', 'meta_keywords', 'meta_description'], 'required'],
             [['description','color','image_url'], 'string'],
-            [['title', 'slug'], 'string', 'max' => 255],
+            [['title', 'author', 'slug'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'boolean'],
@@ -82,11 +86,14 @@ class Guide extends ActiveRecord
             'category_id' => 'Category',
             'title' => 'Title',
             'slug' => 'Slug',
+            'author' => 'Author',
             'image_url' => 'Image',
             'temp_image' => 'Image',
             'description' => 'Description',
             'color' => 'Color',
             'status' => 'Status',
+            'meta_keywords' => 'SEO Keywords',
+            'meta_description' => 'SEO description',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -98,5 +105,13 @@ class Guide extends ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return url
+     */
+    public function getRoute()
+    {
+        return ['guide/slug', 'slug' => $this->slug];
     }
 }

@@ -45,6 +45,19 @@ $attributes = [
         ]
     ],
     [
+        'attribute'=>'featured', 
+        'label'=>'Featured?',
+        'format'=>'raw',
+        'value'=>$model->featured ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
+        'type'=>DetailView::INPUT_SWITCH,
+        'widgetOptions' => [
+            'pluginOptions' => [
+                'onText' => 'Yes',
+                'offText' => 'No',
+            ]
+        ],
+    ],
+    [
         'attribute'=>'status', 
         'label'=>'Available?',
         'format'=>'raw',
@@ -74,6 +87,10 @@ $attributes = [
         ]
     ],
     [
+        'attribute'=>'sku', 
+        'value'=>$model->sku
+    ],
+    [
         'attribute'=>'description', 
         'format'=>'raw',
         'value'=>Markdown::convert($model->description),
@@ -95,19 +112,6 @@ $attributes = [
         'value'=>$model->num_rating
     ],
     [
-        'attribute'=>'featured', 
-        'label'=>'Featured?',
-        'format'=>'raw',
-        'value'=>$model->featured ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>',
-        'type'=>DetailView::INPUT_SWITCH,
-        'widgetOptions' => [
-            'pluginOptions' => [
-                'onText' => 'Yes',
-                'offText' => 'No',
-            ]
-        ],
-    ],
-    [
         'group'=>true,
         'label'=>'SEO Information',
         'rowOptions'=>['class'=>'info']
@@ -121,7 +125,16 @@ $attributes = [
     [
         'attribute'=>'slug', 
         'value'=>$model->slug
+    ],
+    [
+        'attribute'=>'meta_keywords', 
+        'value'=>$model->meta_keywords
+    ],
+    [
+        'attribute'=>'meta_description', 
+        'value'=>$model->meta_description
     ]
+
 ];
 
 $allImages = [];

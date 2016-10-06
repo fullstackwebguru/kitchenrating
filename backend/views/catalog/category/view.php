@@ -69,6 +69,14 @@ $attributes = [
     [
         'attribute'=>'slug', 
         'value'=>$model->slug
+    ],
+    [
+        'attribute'=>'meta_keywords', 
+        'value'=>$model->meta_keywords
+    ],
+    [
+        'attribute'=>'meta_description', 
+        'value'=>$model->meta_description
     ]
 ];
 
