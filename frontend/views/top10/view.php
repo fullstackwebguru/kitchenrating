@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+
 use frontend\widgets\Rating;
 use frontend\widgets\RecentTop10;
 
@@ -32,30 +34,27 @@ Top10JsAsset::register($this);
 	            <h2 class="filter_title">Price</h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter" data-value="0"></div>
-	              <input type="hidden" value="0" name="name1">
+	              <div class="rs_filter" data-value="20" data-key="price_level"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>
 	        </div>
 	        <div class="col-xs-12 col-sm-4">
 	          <div class="rs_price_filter">
-	            <h2 class="filter_title">Price</h2>
+	            <h2 class="filter_title">Quality</h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter"  data-value="50"></div>
-	              <input type="hidden" value="50" name="name2">
+	              <div class="rs_filter"  data-value="50" data-key="quality_level"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>
 	        </div>
 	        <div class="col-xs-12 col-sm-4">
 	          <div class="rs_price_filter">
-	            <h2 class="filter_title">Price</h2>
+	            <h2 class="filter_title">Trust</h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter"  data-value="100"></div>
-	              <input type="hidden" value="100" name="name3">
+	              <div class="rs_filter"  data-value="100" data-key="trust_level"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>
@@ -79,17 +78,10 @@ Top10JsAsset::register($this);
 
 	<div class="product_list_section">
 	<div class="container">
-	  <div class="product_list">
-	  		<?php 
-	  			foreach($model->top10Products as $i => $product) {
-	  		?>
-	  			<?= $this->render('_product', [
-			        'product' => $product,
-			        'rank' => $i+1
-			    ]) ?>
-            <?php
-        		}	
-            ?>
+	  <div class="product_list" data-action="<?=Url::toRoute(['/top10/generate','id'=>$model->id]) ?>">
+	  	<?= $this->render('_productList', [
+			'products' => $model->top10Products,
+		]) ?>
 	  </div>
 	</div>
 </div>

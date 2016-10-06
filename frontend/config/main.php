@@ -43,6 +43,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'top10/generate/<id:\d+>' => 'top10/generate',
                 'top10/<slug>' => 'top10/slug',
                 'product/<slug>' => 'product/slug',
                 'guide/<slug>' => 'guide/slug',
