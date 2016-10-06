@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul>
           <li><?=  Html::a('Home',['/']) ?></li>
           <li><span>/</span></li>
-          <li><?=  Html::a('All Guides',['/guides']) ?></li>
+          <li><?=  Html::a('All Guides',['/guide']) ?></li>
           <li><span>/</span></li>
           <li><strong><?= $model->title ?></strong></li>
         </ul>
