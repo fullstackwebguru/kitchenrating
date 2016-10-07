@@ -50,6 +50,8 @@
         }
     },
     "scripts": {
-        "post-install-cmd": "php init --env=Heroku --overwrite=All"
+        "post-install-cmd": [
+            "sh post-install-cmd.sh"
+        ]
     }
 }
