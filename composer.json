@@ -31,7 +31,8 @@
         "yiisoft/yii2-imagine": "~2.0.0",
         "michelf/php-smartypants" : "1.6-beta1",
         "kartik-v/yii2-markdown": "dev-master",
-        "letyii/yii2-imagecache": "*"
+        "letyii/yii2-imagecache": "*",
+        "driftyco/ionicons": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

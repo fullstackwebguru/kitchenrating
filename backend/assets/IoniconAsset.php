@@ -10,7 +10,7 @@ use yii\web\AssetBundle;
  */
 class IoniconAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/Ionicons';
+    public $sourcePath = '@vendor/driftyco/ionicons';
     public $css = [
         'css/ionicons.min.css',
     ];
