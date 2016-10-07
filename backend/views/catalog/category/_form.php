@@ -24,7 +24,7 @@ echo $form->field($model, 'temp_image')->widget(
     ]
 );
 
-echo Form::widget(
+echo Form::widget([
     'model'=>$model,
     'form'=>$form,
     'columns'=> 1,

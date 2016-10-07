@@ -58,7 +58,7 @@ echo $form->field($model, 'description')->widget(
     ['height' => 300, 'encodeLabels' => false]
 );
 
-echo Form::widget(
+echo Form::widget([
     'model'=>$model,
     'form'=>$form,
     'columns'=> 1,
