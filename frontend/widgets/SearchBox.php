@@ -6,6 +6,7 @@ use Yii;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use frontend\widgets\assets\SearchBoxAsset;
 
 class SearchBox extends \yii\base\Widget
 {
@@ -14,38 +15,38 @@ class SearchBox extends \yii\base\Widget
      */
     public $class;
     public $type;
+    public $name;
     private $actionUrl;
+
+    private $acceptedType = [
+        'side',
+        'banner',
+        'top',
+        'product'
+    ];
 
     public function init()
     {
         parent::init();
 
-        if ($this->class === null) {
-            $this->class = 'single_sidebar sidebar_seach_box';
-        }
-
-        if ($this->type === null) {
+        if ($this->type === null || !in_array($this->type, $this->acceptedType)) {
             $this->type = 'side';
         }
+
+        $this->name = 'tw_search_' . $this->type;
 
         $this->actionUrl = ['/widget/search'];
     }
 
     public function run()
     {
-        if ($this->type == 'side') {
-            $html = '<div class="' . $this->class . '">';
-            $html .= '<form action="' . Url::toRoute($this->actionUrl) .'" method="post">';
-            $html .= '<div class="sidebar_search">';
-            $html .= '<input placeholder="Search.." type="text" name="name">';
-            $html .= '<button type="submit" name="ts"><i class="fa fa-search"></i></button>';
-            $html .= '</div>';
-            $html .= '</form>';
+        SearchBoxAsset::register($this->getView());
 
-            $html .= '</div>';
-        } else {
-            $html = 'Message!!!';
-        }
-        return $html;
+        $viewName= 'searchbox_' . $this->type;
+        return $this->render($viewName, ['actionUrl' => $this->actionUrl, 'name' => $this->name]);
+    }
+
+    public function getViewPath() {
+        return '@frontend/widgets/views/';
     }
 }

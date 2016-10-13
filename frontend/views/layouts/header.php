@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+use frontend\widgets\SearchBox;
+
 /* @var $this \yii\web\View */
 /* @var $content string */
 ?>
@@ -14,13 +16,10 @@ use yii\helpers\Url;
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-        </button><!-- 
-        <div class="pull-right">
+        </button>
+        <!-- <div class="pull-right">
           <div class="header_search_box">
-            <form action="index.html">
-              <input placeholder="Search.." type="text" name="stop">
-              <button type="submit" name='ts'><i class="fa fa-search"></i></button>
-            </form>
+            <?= SearchBox::widget(['type'=>'top']) ?>
           </div>
         </div> -->
         <a href="<?=Url::toRoute(['/'])?>" class="navbar-brand top_logo">

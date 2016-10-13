@@ -65,4 +65,5 @@
 	$('.go_to_top').mPageScroll2id({
 							offset:0
 						});
+
 })(jQuery);

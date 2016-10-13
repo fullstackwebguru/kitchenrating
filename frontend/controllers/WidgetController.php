@@ -35,7 +35,9 @@ class WidgetController extends Controller
      */
     public function actionSearch()
     {
-        return 'ppost';
+        $out = 'ppost';
+        echo Json::encode($out);
+        return;
     }
 
     /**
