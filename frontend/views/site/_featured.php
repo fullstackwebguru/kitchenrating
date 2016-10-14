@@ -46,7 +46,7 @@ use frontend\widgets\Rating;
           </div>
         <?php
 
-          if ($i==2) { $i=0; $tagOppend = false; ?>
+          if ($i==2) { $i=-1; $tagOppend = false; ?>
             </div>
         <?php } } ?>
 
