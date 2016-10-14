@@ -12,9 +12,11 @@ use frontend\widgets\Rating;
       <div class="feature_pruducts_inner">
         <h2 class="section_title">Featured Products</h2>
           <?php
-          foreach ($featuredProducts as $i =>$product) {
+          $i =0;
+          $tagOppend = false;
+          foreach ($featuredProducts as $product) {
 
-            if ($i%3 ==0) { ?>
+            if ($i == 0) { $tagOppend = true; ?>
               <div class="row products_row">
           <?php }
           ?>
@@ -44,9 +46,13 @@ use frontend\widgets\Rating;
           </div>
         <?php
 
-          if ($i%3 ==0) { ?>
+          if ($i==2) { $i=0; $tagOppend = false; ?>
             </div>
         <?php } } ?>
+
+         <?php if ($tagOppend ==true) { ?>
+            </div>
+        <?php } ?>
         <!-- <div class="clearfix text-center ">
           <a href="#" class="btn btn-default btn_common">SHOW MORE</a>
         </div> -->
