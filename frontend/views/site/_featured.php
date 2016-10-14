@@ -51,6 +51,7 @@ use frontend\widgets\Rating;
             </div>
           </div>
         <?php
+            $i++;
             }
            ?>
 
