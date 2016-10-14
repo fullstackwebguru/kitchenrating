@@ -45,7 +45,7 @@ function renderChange() {
 		var actionUrl = $(".product_list").attr("data-action");
 		
 		$.ajax( {
-			type: "GET",
+			type: "POST",
 			url : actionUrl,
 			data : rangeObj,
 			success : function (data) {

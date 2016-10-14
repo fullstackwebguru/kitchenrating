@@ -135,8 +135,16 @@ class Category extends ActiveRecord
         return static::findOne(['title' => $title, 'status' => self::STATUS_ACTIVE]);
     }
 
-    public function getTop10Products() {
-        return $this->products;
+    public function findTop10Products($orderBy) {
+        $orderSet[] = 'score DESC';
+        foreach($orderBy as $key => $order) {
+            $orderSet[] = $key .' DESC';
+        }
+
+        $orderByStr = implode(',', $orderSet);
+        $query = $this->getProducts()->orderBy($orderByStr)->limit(10);
+
+        return $query;
     }
 
     /**

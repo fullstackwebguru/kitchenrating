@@ -80,7 +80,7 @@ Top10JsAsset::register($this);
 	<div class="container">
 	  <div class="product_list" data-action="<?=Url::toRoute(['/top10/generate','id'=>$model->id]) ?>">
 	  	<?= $this->render('_productList', [
-			'products' => $model->top10Products,
+			'products' => $model->findTop10Products([])->all(),
 		]) ?>
 	  </div>
 	</div>

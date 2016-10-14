@@ -13,8 +13,15 @@ use common\models\Category;
  */
 class Top10Controller extends Controller
 {
-    
-    
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
+
     public function actionSlug($slug) 
     {
         $model = $this->findModelBySlug($slug);
@@ -25,21 +32,14 @@ class Top10Controller extends Controller
 
     public function actionGenerate($id)
     {
+        $post['quality_level'] = Yii::$app->request->post('quality_level',0);
+        $post['trust_level'] = Yii::$app->request->post('trust_level',0);
+        $post['price_level'] = Yii::$app->request->post('price_level',0);
+        arsort($post);
         $model = $this->findModel($id);
-
-        $keys = [];
-        foreach ($model->products as $i => $product) {
-            $keys[] = $i;
-        }
-
-        shuffle($keys);
-        if (count($keys) > 10) {
-            $keys = array_slice($keys, 0, 10);
-        }
-
-        $result = [];
-        foreach ($keys as $key) {
-            $result[] = $model->products[$key];
+        $products = $model->findTop10Products($post)->all();
+        foreach ($products as $i => $product) {
+            $result[] = $product;
         }
 
         return $this->renderPartial('_productList', [
