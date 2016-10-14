@@ -24,7 +24,6 @@ use frontend\widgets\Rating;
               <div class="row products_row">
           <?php }
 
-
           ?>
           <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="single_product_cell">
@@ -36,6 +35,7 @@ use frontend\widgets\Rating;
                 <div class="media-left">
                   <a href="<?=Url::toRoute($product->getRoute())?>">
                     <span>Deal</span>
+                    <span> <?=Yii::$app->imageCache->cachePath; ?>  </span>
                     <?= Yii::$app->imageCache->img('@mainUpload/' . $product->getMainImage()->image_url, '130x130', ['class' => 'file-preview-image']) ?>
                   </a>
                 </div>
