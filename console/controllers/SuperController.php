@@ -4,6 +4,7 @@ namespace console\controllers;
 use Yii;
 use yii\console\Controller;
 use common\models\User;
+use common\models\ProductImage;
 
 class SuperController extends Controller
 {
@@ -42,5 +43,10 @@ class SuperController extends Controller
         $authorRole = $auth->getRole('catalogManager');
         $auth->assign($authorRole, $user->getId());    
         
+    }
+
+    public function actionImage() {
+        $model = ProductImage::findOne(14);
+        echo Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '130x130', ['class' => 'file-preview-image']);
     }
 }

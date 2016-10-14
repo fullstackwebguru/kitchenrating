@@ -20,6 +20,11 @@ return [
                 ],
             ],
         ],
+        'imageCache' => [
+            'class' => 'letyii\imagecache\imageCache',
+            'cachePath' => '@app/web/uploads',
+            'cacheUrl' => '@app/uploads',
+        ],
     ],
     'params' => $params,
 ];
