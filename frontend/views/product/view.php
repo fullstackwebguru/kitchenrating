@@ -66,8 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	        </div>
 	      </div>
 	      <div class="col-xs-12 col-sm-7">
-	        <a href="#" class="title">PHILIPS Blender 500W RFH-43</a>
-	        <span class="product_code">500W 12500RPM</span>
+	        <a href="#" class="title"><?= $model->title ?> 3</a>
+	        <span class="product_code"><?= $model->sku ?> </span>
 	        <div class="rate_and_color">
 	          <div class="p_colors">
 	            <span>color options</span>
@@ -101,6 +101,40 @@ $this->params['breadcrumbs'][] = $this->title;
 	    </div>
 	    
 	    <div class="separator"></div>
+
+	    <?php 
+
+	    if (count($model->productInfos) > 0 ) {
+	    ?>
+	    <div class="buying_options_cmp">
+          <h2>Compare buying options</h2>
+          <div class="do_shop_links">
+          <?php
+          foreach($model->productInfos as $info) {
+          ?>
+            <div class="row">
+              <div class="col-xs-12 col-sm-5">
+                <strong><?= $model->title ?></strong>
+              </div>
+              <div class="col-xs-12 col-sm-3">
+                <img src="<?= $info->store->image_url ?>" alt="<?= $info->store->title ?>">
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <a href="<?= $info->product_url ?>" class="btn btn-default btn_common btn_yellow">SHOP >></a>
+              </div>
+            </div>
+          <?php
+		      }
+          ?>
+
+          </div>
+        </div>
+        <div class="separator"></div>
+
+        <?php 
+    	}
+        ?>
+
 	  </div>
 	  
 	  <a href="<?= Url::toRoute($model->category->getRoute()) ?>" class="back_to_10">

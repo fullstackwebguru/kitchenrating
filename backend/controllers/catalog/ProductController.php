@@ -6,8 +6,10 @@ use Yii;
 use common\models\Category;
 use common\models\Product;
 use common\models\ProductImage;
+use common\models\ProductInfo;
 use common\models\Store;
 use backend\models\ProductSearch;
+use backend\models\ProductInfoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,6 +37,7 @@ class ProductController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'deleteinfo' => ['POST'],
                 ],
             ],
         ];
@@ -72,8 +75,8 @@ class ProductController extends Controller
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
             return $this->render('index', [
-                'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                'searchModel' => $searchModel,
                 'categories' => $categories,
                 'stores' => $stores
             ]);
@@ -88,22 +91,43 @@ class ProductController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        if (Yii::$app->request->isAjax && Yii::$app->request->post('kvdelete')) {
-            $this->findModel($id)->delete();
+        if (Yii::$app->request->isAjax) {
+            if (Yii::$app->request->post('kvdelete')) {
+                $this->findModel($id)->delete();
+                echo Json::encode([
+                    'success' => true,
+                    'messages' => [
+                        'kv-detail-info' => 'The category # ' . $id . ' was successfully deleted. ' . 
+                            Html::a('<i class="glyphicon glyphicon-hand-right"></i>  Click here', 
+                                ['index'], ['class' => 'btn btn-sm btn-info']) . ' to proceed.'
+                    ]
+                ]);
+                return;
+            } else if (Yii::$app->request->post('hasEditable')) {
+                $productId = Yii::$app->request->post('editableKey');
+                $infoModel = ProductInfo::findOne($productId);
 
-            echo Json::encode([
-                'success' => true,
-                'messages' => [
-                    'kv-detail-info' => 'The category # ' . $id . ' was successfully deleted. ' . 
-                        Html::a('<i class="glyphicon glyphicon-hand-right"></i>  Click here', 
-                            ['index'], ['class' => 'btn btn-sm btn-info']) . ' to proceed.'
-                ]
-            ]);
-            return;
+                $out = ['output'=>'', 'message'=>''];
+                $posted = current(Yii::$app->request->post('ProductInfo'));
+                $post = ['ProductInfo' => $posted];
+
+                if ($infoModel->load($post) && $infoModel->save()) {
+                    $out['message'] = '';
+                } else {
+                    $out['message'] = 'Error in request';
+                }
+
+                echo Json::encode($out);
+                return;
+            }
         }
 
         $categories = Category::find()->orderBy('title')->asArray()->all();
         $stores = Store::find()->orderBy('title')->asArray()->all();
+
+        $searchModel = new ProductInfoSearch();
+        $searchModel->base_product_id = $id;
+        $dataProvider = $searchModel->search([]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -117,11 +141,51 @@ class ProductController extends Controller
 
             return $this->render('view', [
                 'model' => $model,
+                'dataProvider' => $dataProvider,
                 'viewMode' => $viewMode,
                 'categories' => $categories,
                 'stores' => $stores
             ]);
         }
+    }
+
+    /**
+     * Add Product Info to product
+     * @param integer $id
+     * @return mixed
+     */
+    
+    public function actionAddinfo($id) {
+
+        $productModel = $this->findModel($id);
+        $model = new ProductInfo();
+        $model->product_id = $id;
+        $stores = Store::find()->orderBy('title')->asArray()->all();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $productModel->id]);
+        }elseif (Yii::$app->request->isAjax) {
+            return $this->renderAjax('_infoform', [
+                        'model' => $model,
+                        'stores' => $stores
+            ]);
+        } else {
+            return $this->render('_infoform', [
+                        'model' => $model,
+                        'stores' => $stores
+            ]);
+        }
+    }
+
+    /**
+     * Delete Product Info to product
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDeleteinfo($id, $infoId) {
+        $model = $this->findModel($id);
+        ProductInfo::findOne($infoId)->delete();
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**

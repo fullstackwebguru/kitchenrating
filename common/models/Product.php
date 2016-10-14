@@ -34,6 +34,7 @@ use yii\behaviors\SluggableBehavior;
  * @property Category $category
  * @property Store $store
  * @property ProductImage[] $productImages
+ * @property ProductInfo[] $productInfos
  */
 
 class Product extends ActiveRecord
@@ -140,6 +141,14 @@ class Product extends ActiveRecord
     public function getProductImages()
     {
         return $this->hasMany(ProductImage::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductInfos()
+    {
+        return $this->hasMany(ProductInfo::className(), ['product_id' => 'id']);
     }
 
     public function getMainImage()

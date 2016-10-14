@@ -25,7 +25,7 @@ class m160923_124225_create_product_table extends Migration
             'sku' => $this->string(255)->notNull(),
             'slug' => $this->string(255),
             'description' => $this->text(),
-            'product_url' => $this->string(255)->notNull(),
+            'product_url' => $this->string(500)->notNull(),
             'store_id' => $this->integer(11)->notNull(),
             'rating' => $this->double(2)->notNull(),
             'num_rating' => $this->integer(11)->notNull(),
