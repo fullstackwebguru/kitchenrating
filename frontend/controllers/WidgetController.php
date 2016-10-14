@@ -8,7 +8,9 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use common\models\Category;
+use common\models\Newsletter;
 use frontend\models\CategorySearch;
+
 
 /**
  * Site controller
@@ -60,7 +62,14 @@ class WidgetController extends Controller
      * @return mixed
      */
     public function actionNewsletter()
-    {
-        return 'ppost';
+    { 
+        $model = new Newsletter();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('success', 'Thank you. Now ' . $model->email .' is part of our campaign list.');
+        } else {
+            Yii::$app->getSession()->setFlash('error', 'Sorry, We can\'t process this request');
+        }
+
+        return $this->goBack();
     }
 }

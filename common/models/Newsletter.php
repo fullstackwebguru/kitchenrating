@@ -41,7 +41,7 @@ class Newsletter extends ActiveRecord
     public function rules()
     {
         return [
-            [['email','required'],
+            [['email'],'required'],
             [['email'], 'string', 'max' => 255],
         ];
     }
@@ -53,7 +53,7 @@ class Newsletter extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Email',
+            'email' => 'Email',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

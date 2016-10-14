@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 use frontend\widgets\LatestGuide;
+use frontend\widgets\NewsletterBox;
 
 $this->title = 'Kitchen Rating';
 ?>
@@ -24,13 +25,7 @@ $this->title = 'Kitchen Rating';
 <div class="subscriber_section">
   <div class="container">
     <div class="pull-right">
-      <div class="signup_box">
-        <label>Get latest deals in inbox</label>
-        <div class="input_box">
-          <input type="text" placeholder="SUBSCRIBE NEWSLETTER" class="form-control">
-          <button class="signup_btn">SIGNUP</button>
-        </div>
-      </div>
+      <?= NewsletterBox::widget(['type' => 'footer']); ?>
     </div>
     <div class="pull-left">
       <div class="footer_social">

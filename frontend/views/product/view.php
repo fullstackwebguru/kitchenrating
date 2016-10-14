@@ -7,6 +7,7 @@ use frontend\widgets\RecentTop10;
 use yii\helpers\Url;
 use kartik\markdown\Markdown;
 use frontend\widgets\Rating;
+use frontend\widgets\SearchBox;
 
 $this->title = 'Product -' . $model->title;
 $this->params['breadcrumbs'][] = $this->title;
@@ -145,15 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	  <div class="search_box">
 	      <h2>search for more products</h2>
 	      <div class="search_form">
-	        <form action="index.html">
-	          <div class="input_s">
-	            <input type="text" placeholder="What are you looking for?" class="form-control">
-	          </div>
-	          <div class="submit_s">
-	            <button type="submit"><i class="fa fa-search"></i></button>
-	          </div>
-	          <div class="clear_fix"></div>
-	        </form>
+	      	<?= SearchBox::widget(['type'=>'product']) ?>
 	        <div class="clear_fix"></div>
 	      </div>
 	    </div>

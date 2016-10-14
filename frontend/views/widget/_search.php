@@ -15,7 +15,7 @@ use frontend\widgets\Rating;
         <div>
           <?= Rating::widget(['rating' => $category->rating]) ?>
           <span class="rate_title"><?=$category->num_rating?> ratings</span>
-          <?=$category->title?> <span>2016</span>
+          <?=$category->title?>
         </div>
       </a>
   <?php } ?>

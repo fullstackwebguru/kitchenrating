@@ -38,11 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-xs-12 col-sm-4">
           <div class="sidebar">
-            
+            <div class="single_sidebar sidebar_seach_box">
+            <?= SearchBox::widget(['type' => 'side']) ?>
+            </div>
             <?= RecentGuide::widget() ?>
-            <?= SearchBox::widget() ?>
             <?= NewsletterBox::widget() ?>
-
           </div>
         </div>
       </div>

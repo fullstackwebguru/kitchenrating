@@ -17,6 +17,9 @@ return [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => ''
         ],
+        'user' => [
+            'identityClass' => 'common\models\User',
+        ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',

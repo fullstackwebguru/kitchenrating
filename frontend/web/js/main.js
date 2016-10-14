@@ -66,10 +66,4 @@
 							offset:0
 						});
 
-
-	//Share
-	//
-	$('.btnShare').click(function() {
-		
-	});
 })(jQuery);

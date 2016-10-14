@@ -50,6 +50,8 @@ AppAsset::register($this);
         'header.php'
     ) ?>
 
+    <?= Alert::widget() ?>
+
     <?= $content ?>
 
     <?= $this->render(

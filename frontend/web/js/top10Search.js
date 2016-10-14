@@ -11,7 +11,9 @@ $('input[name^="tw_search_"]').blur(function(){
 	var type = $(this).attr('name').split('_').pop();
 	var result_container = "#tw_search_result_" + type;
 
-	$(result_container).hide();
+	setTimeout( function() {
+		$(result_container).hide();
+	}, 400)
 });
 
 
