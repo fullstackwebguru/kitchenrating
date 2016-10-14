@@ -36,9 +36,9 @@ $this->title = 'Kitchen Rating';
       <div class="footer_social">
         <p>Follow KitchenRatings.com</p>
         <div>
-          <a href="#"><span class="fa fa-facebook"></span></a>
-          <a href="#"><span class="fa fa-twitter"></span></a>
-          <a href="#"><span class="fa fa-google-plus"></span></a>
+          <a href="https://facebook.com/share.php?u=https://kitchenrating.com&title=<?=$this->title?>" class="btnShare"><span class="fa fa-facebook"></span></a>
+          <a href="https://twitter.com/intent/tweet?status=<?=$this->title?>+https://kitchenratings.com" class="btnShare"><span class="fa fa-twitter"></span></a>
+          <a href="https://plus.google.com/share?url=https://kitchenratings.com" class="btnShare"><span class="fa fa-google-plus"></span></a>
         </div>
       </div>
     </div>

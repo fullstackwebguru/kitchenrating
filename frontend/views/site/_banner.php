@@ -11,6 +11,8 @@ use frontend\widgets\SearchBox;
       <div class="search_form">
         <?= SearchBox::widget(['type'=>'banner']) ?>
         <div class="clear_fix"></div>
+
+        
       </div>
     </div>
   </div>

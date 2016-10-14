@@ -28,22 +28,19 @@ AppAsset::register($this);
 <a href="#site_body" class="go_to_top">
   <i class="fa fa-angle-up"></i>
 </a>
+
 <div class="social_share">
-  <a href="">
+  <a href="https://facebook.com/share.php?u=https://kitchenrating.com&title=<?=$this->title?>" class="btnShare">
     <span>Facebook</span>
     <i class="fa fa-facebook"></i>
   </a>
-  <a href="">
+  <a href="https://twitter.com/intent/tweet?status=<?=$this->title?>+https://kitchenratings.com" class="btnShare">
     <span>Twitter</span>
     <i class="fa fa-twitter"></i>
   </a>
-  <a href="">
+  <a href="https://plus.google.com/share?url=https://kitchenratings.com" class="btnShare">
     <span>Facebook</span>
-    <i class="fa fa-facebook"></i>
-  </a>
-  <a href="">
-    <span>Twitter</span>
-    <i class="fa fa-twitter"></i>
+    <i class="fa fa-google"></i>
   </a>
 </div>
 
