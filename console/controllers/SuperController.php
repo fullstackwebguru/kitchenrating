@@ -47,6 +47,10 @@ class SuperController extends Controller
 
     public function actionImage() {
         $model = ProductImage::findOne(14);
-        echo Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '130x130', ['class' => 'file-preview-image']);
+        $srcPath = Yii::getAlias('@mainUpload/' . $model->image_url);
+        echo "src path ---- " . $srcPath . "\n";
+        echo "cache Path  ---- " . yii::$app->imageCache->cachePath . "\n";
+        echo "cache URL ---- " . yii::$app->imageCache->cacheUrl . "\n";
+        echo Yii::$app->imageCache->img($srcPath, '130x130', ['class' => 'file-preview-image']) . "\n";
     }
 }
