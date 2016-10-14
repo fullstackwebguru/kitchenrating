@@ -16,9 +16,15 @@ use frontend\widgets\Rating;
           $tagOppend = false;
           foreach ($featuredProducts as $product) {
 
+            if ($i==3) { $i=0; $tagOppend = false; ?>
+            </div>
+            <?php } 
+
             if ($i == 0) { $tagOppend = true; ?>
               <div class="row products_row">
           <?php }
+
+
           ?>
           <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="single_product_cell">
@@ -45,10 +51,8 @@ use frontend\widgets\Rating;
             </div>
           </div>
         <?php
-
-          if ($i==2) { $i=-1; $tagOppend = false; ?>
-            </div>
-        <?php } } ?>
+            }
+           ?>
 
          <?php if ($tagOppend ==true) { ?>
             </div>
