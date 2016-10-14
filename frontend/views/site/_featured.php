@@ -15,7 +15,7 @@ use frontend\widgets\Rating;
           foreach ($featuredProducts as $i =>$product) {
 
             if ($i%3 ==0) { ?>
-              <?= <div class="row products_row"> ?>
+              <div class="row products_row">
           <?php }
           ?>
           <div class="col-xs-12 col-sm-6 col-md-4">
