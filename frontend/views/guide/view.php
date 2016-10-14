@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
               <?= Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '752x352', ['alt' => $model->title]) ?>
             </a>
             <div class="page_meta">
-              On June 12 th, 2015 
+              On <?= Yii::$app->formatter->asDate($model->created_at, 'long'); ?>
             </div>
             <?= Markdown::convert($model->description) ?>
           </div>

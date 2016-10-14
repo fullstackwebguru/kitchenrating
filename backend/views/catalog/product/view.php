@@ -181,7 +181,6 @@ $deleteMsg = 'Delete Product information';
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
     [
-        'class' => 'kartik\grid\EditableColumn',
         'attribute' => 'store_id',
         'pageSummary' => 'Page Total',
         'vAlign'=>'middle',

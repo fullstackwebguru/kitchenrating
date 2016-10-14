@@ -53,6 +53,12 @@ return [
             'cachePath' => '@app/web/uploads',
             'cacheUrl' => '@web/uploads',
         ],
+        'formatter' => [
+            'dateFormat' => 'dd.MM.yyyy',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'EUR',
+       ],
     ],
     'params' => $params,
 ];

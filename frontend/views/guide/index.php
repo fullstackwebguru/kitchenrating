@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	            <p><?= $guide->meta_description ?></p>
 	            <div class="meta">
 	              <strong><?= $guide->author?></strong>
-	              <span>01.feb 2016.</span>
+	              <span><?= Yii::$app->formatter->asDate($guide->created_at, 'long'); ?></span>
 	            </div>
 	          </div>
 	        </a>
