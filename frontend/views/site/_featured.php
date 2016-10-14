@@ -36,7 +36,7 @@ use frontend\widgets\Rating;
                 <div class="media-left">
                   <a href="<?=Url::toRoute($product->getRoute())?>">
                     <span>Deal</span>
-                    <span><?= Yii::$app->imageCache->imgSrc('@mainUpload/' . $product->getMainImage()->image_url, '130x130') ?> </span>
+                    <span><?= Yii::getAlias('@mainUpload/' . $product->getMainImage()->image_url) ?> </span>
                     <?= Yii::$app->imageCache->img('@mainUpload/' . $product->getMainImage()->image_url, '130x130', ['class' => 'file-preview-image']) ?>
                   </a>
                 </div>
