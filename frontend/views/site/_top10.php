@@ -33,10 +33,11 @@ use frontend\widgets\Rating;
             </div>
           </a>
         </div>
-      </div>
+      
       <?php
           }
       ?>
+      </div>
     </div>
   </div>
 </div>

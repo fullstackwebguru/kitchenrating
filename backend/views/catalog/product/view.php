@@ -319,7 +319,6 @@ $this->registerJs(
     </div>
     </div>
 <div>
-?>
 
 <?php
     yii\bootstrap\Modal::begin([
