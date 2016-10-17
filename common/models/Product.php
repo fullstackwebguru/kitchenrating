@@ -161,6 +161,26 @@ class Product extends ActiveRecord
     }
 
     /**
+     * @return rank in category
+     */
+    public function getDefaultRank() {
+        $connection = Yii::$app->getDb();
+        $result = $connection->createCommand(' SELECT rs.rank FROM (
+            SELECT p.*, @curRank:= @curRank + 1 AS rank 
+            FROM ' . self::tableName() . ' p, (SELECT @curRank:= 0) r  
+            WHERE p.category_id = :category_id 
+            ORDER BY p.score DESC, p.trust_level DESC, p.quality_level DESC, p.price_level DESC
+        ) as rs 
+        WHERE rs.id = :product_id', 
+        [
+            ':category_id' => $this->category_id,
+            ':product_id' => $this->id
+        ])->queryAll();
+
+        return $result[0]['rank'];
+    }
+
+    /**
      * @return products
      */
     public static function findFeaturedProducts()

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "179f5806ecb3fac513cb69f74cc3c8cd",
-    "content-hash": "1be5ed989def92620ca61b7b8e885dbb",
+    "hash": "b7b52406cbeb585868706d9cc3c78133",
+    "content-hash": "faafde65a0d1103aef0083b853a2498f",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -334,6 +334,58 @@
             "time": "2016-09-14 20:40:20"
         },
         {
+            "name": "cloudinary/cloudinary_php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cloudinary/cloudinary_php.git",
+                "reference": "a15a8cf7bca9ecb1070edc1eea4a43c32fddd2dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/a15a8cf7bca9ecb1070edc1eea4a43c32fddd2dc",
+                "reference": "a15a8cf7bca9ecb1070edc1eea4a43c32fddd2dc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ],
+                "files": [
+                    "src/Helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cloudinary",
+                    "homepage": "https://github.com/cloudinary/cloudinary_php/graphs/contributors"
+                }
+            ],
+            "description": "Cloudinary PHP SDK",
+            "homepage": "https://github.com/cloudinary/cloudinary_php",
+            "keywords": [
+                "cdn",
+                "cloud",
+                "cloudinary",
+                "image management",
+                "sdk"
+            ],
+            "time": "2016-08-14 15:10:18"
+        },
+        {
             "name": "driftyco/ionicons",
             "version": "v2.0.1",
             "source": {
@@ -429,16 +481,16 @@
         },
         {
             "name": "fxp/composer-asset-plugin",
-            "version": "v1.2.1",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fxpio/composer-asset-plugin.git",
-                "reference": "d7d189e8ffac26a2e39e26a9c75e1fc5c2e2b98d"
+                "reference": "60bc94db574103dfc73acb907fa79c6dfc86c96e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fxpio/composer-asset-plugin/zipball/d7d189e8ffac26a2e39e26a9c75e1fc5c2e2b98d",
-                "reference": "d7d189e8ffac26a2e39e26a9c75e1fc5c2e2b98d",
+                "url": "https://api.github.com/repos/fxpio/composer-asset-plugin/zipball/60bc94db574103dfc73acb907fa79c6dfc86c96e",
+                "reference": "60bc94db574103dfc73acb907fa79c6dfc86c96e",
                 "shasum": ""
             },
             "require": {
@@ -481,7 +533,7 @@
                 "npm",
                 "package"
             ],
-            "time": "2016-08-03 07:44:07"
+            "time": "2016-10-12 08:03:45"
         },
         {
             "name": "imagine/imagine",
@@ -772,12 +824,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-detail-view.git",
-                "reference": "65e626c0b55e7cca0db0886410771cd304c1fbd2"
+                "reference": "741f56f37858f0745cd180a505c7ddbe60b01829"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-detail-view/zipball/65e626c0b55e7cca0db0886410771cd304c1fbd2",
-                "reference": "65e626c0b55e7cca0db0886410771cd304c1fbd2",
+                "url": "https://api.github.com/repos/kartik-v/yii2-detail-view/zipball/741f56f37858f0745cd180a505c7ddbe60b01829",
+                "reference": "741f56f37858f0745cd180a505c7ddbe60b01829",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +870,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-06-22 01:29:56"
+            "time": "2016-10-16 12:32:54"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -931,12 +983,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-grid.git",
-                "reference": "7cca20a27234207d6d114a39a3263ae9c88fd171"
+                "reference": "c731108f7cc2f37cd76f77af84c869e7dfa636f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/7cca20a27234207d6d114a39a3263ae9c88fd171",
-                "reference": "7cca20a27234207d6d114a39a3263ae9c88fd171",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/c731108f7cc2f37cd76f77af84c869e7dfa636f2",
+                "reference": "c731108f7cc2f37cd76f77af84c869e7dfa636f2",
                 "shasum": ""
             },
             "require": {
@@ -973,7 +1025,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-06 20:07:42"
+            "time": "2016-10-08 18:18:35"
         },
         {
             "name": "kartik-v/yii2-helpers",
@@ -3091,13 +3143,15 @@
         "kartik-v/yii2-detail-view": 20,
         "kartik-v/yii2-builder": 20,
         "michelf/php-smartypants": 10,
-        "kartik-v/yii2-markdown": 20
+        "kartik-v/yii2-markdown": 20,
+        "cloudinary/cloudinary_php": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.4.0",
         "ext-gd": "*",
+        "ext-curl": "*",
         "ext-imagick": "*"
     },
     "platform-dev": []

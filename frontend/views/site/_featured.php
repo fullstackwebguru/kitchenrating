@@ -39,7 +39,7 @@ use frontend\widgets\Rating;
                   </a>
                 </div>
                 <div class="media-body">
-                  <h2>#02</h2>
+                  <h2>#<?= $product->getDefaultRank() ?></h2>
                   <h3>in <?=$product->category->title?></h3>
                   <?= Rating::widget(['rating' => $product->rating]) ?>
                   <p>Based on <?= $product->num_rating ?> ratings</p>
