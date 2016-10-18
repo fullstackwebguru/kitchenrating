@@ -50,7 +50,7 @@ class RecentTop10 extends \yii\base\Widget
             $itemTemplate .= '<div class="product_list_1_single_in">';
 
             $itemTemplate .= '<a href="'. Url::toRoute($category->getRoute()) .'" class="product_list_1_img">';
-            $itemTemplate .= Yii::$app->imageCache->img('@mainUpload/' . $category->image_url, '249x194');
+            $itemTemplate .= '<img src="' . cloudinary_url($category->image_url, array("width" => 359, "height" => 280, "crop" => "fill")) .'"';
             $itemTemplate .= '</a>';
 
             $itemTemplate .= '<a href="'. Url::toRoute($category->getRoute()) .'" class="title">' . $category->title . '</a>';

@@ -14,7 +14,7 @@ use yii\helpers\Url;
       </div>
       <div class="col-xs-12 col-sm-2">
         <a href="<?=Url::toRoute($product->getRoute())?>" class="product_thumb">
-          <?= Yii::$app->imageCache->img('@mainUpload/' . $product->getMainImage()->image_url, '165x170') ?>
+        <img src="<?= cloudinary_url($product->getMainImage() ? $product->getMainImage()->image_url : '', array("width" => 165, "height" => 180, "crop" => "fill")) ?>" >
         </a>
       </div>
       <div class="col-xs-12 col-sm-4 col-md-5">

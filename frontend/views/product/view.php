@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				if ($model->productImages  && count($model->productImages)>0) {
 
 					$mainImage = $model->productImages[0];
-					$mainImg = Yii::getAlias(Yii::$app->imageCache->imgSrc('@mainUpload/' . $mainImage->image_url, '550x550'));
+					$mainImg = cloudinary_url($mainImage->image_url, array("width" => 550, "height" => 550, "crop" => "fill"));
 			?>
 				
 	          <a href="<?= $mainImg ?>" data-rel="prettyPhoto[pp_gal]"  class="big_img">
@@ -52,8 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	          <div class="owl-carousel owl-theme product_gallery">
 	          	<?php 
 					foreach($model->productImages as $pImage) {
-						$smImg = Yii::getAlias(Yii::$app->imageCache->imgSrc('@mainUpload/' . $pImage->image_url, '550x550'));
-						$mainImg = Yii::getAlias(Yii::$app->imageCache->imgSrc('@mainUpload/' . $pImage->image_url, '113x113'));
+						$smImg = cloudinary_url($pImage->image_url, array("width" => 550, "height" => 550, "crop" => "fill"));
+						$smImg = cloudinary_url($pImage->image_url, array("width" => 113, "height" => 113, "crop" => "fill"));
 	          	?>
 	            <a href="#" data-sm-img="<?= $smImg ?>" data-lg-img="<?= $smImg ?> "><img  src="<?= $mainImg ?>" alt="tilte"></a>
 	            <?php

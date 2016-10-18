@@ -101,11 +101,15 @@ $allImages = [];
 $allImageConfig = [];
 
 if ($model->image_url) {
-    $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '200x150', ['class' => 'file-preview-image']);
+    $allImages[] = '<img src="' . cloudinary_url($model->image_url, array("width" => 300, "height" => 450, "crop" => "fill")) .'" class="file-preview-image">';
+
     $allImageConfig[] =[   
             'caption' => 'Current Image',
+            'frameAttr'=> [
+                'style' => 'height:150px; width:100px;',
+            ],
             'url' => Url::toRoute(['detach', 'id'=>$model->id])
-    ];    
+    ];
 }
 
 ?>

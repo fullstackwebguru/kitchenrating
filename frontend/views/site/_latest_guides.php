@@ -15,7 +15,7 @@ use yii\helpers\Url;
         <div class="col-xs-12 col-sm-3">
           <div class="single_guided_box">
             <a href="<?= Url::toRoute($guide->getRoute())?>" class="img_thumb">
-              <?= Yii::$app->imageCache->img('@mainUpload/' . $guide->image_url, '263x198', ['class' => 'file-preview-image']) ?>
+            <img src="<?= cloudinary_url($guide->image_url, array("width" => 263, "height" => 198, "crop" => "fill")) ?>" class="file-preview-image">
             </a>
             <?=  Html::a($guide->title, $guide->getRoute(), ['class' => 'guide_title']) ?>
           </div>

@@ -164,11 +164,17 @@ $allImages = [];
 $allImageConfig = [];
 
 foreach($model->productImages as $pImage) {
-    $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $pImage->image_url, '300x200', ['class' => 'file-preview-image']);
+    // $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $pImage->image_url, '300x200', ['class' => 'file-preview-image']);
+    // 
+    $allImages[] = '<img src="' . cloudinary_url($pImage->image_url, array("width" => 300, "height" => 450, "crop" => "fill")) .'" class="file-preview-image">';
+
     $allImageConfig[] =[   
             'caption' => 'Image',
+            'frameAttr'=> [
+                'style' => 'height:150px; width:100px;',
+            ],
             'url' => Url::toRoute(['detach', 'id'=>$model->id, 'imageId' => $pImage->id])
-    ];    
+    ];
 }
 
 

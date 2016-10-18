@@ -60,7 +60,7 @@ class ProductController extends Controller
 
             if ($model->load($post) && $model->save()) {
                 $out['message'] = '';
-            } else {
+            } else {        
                 $out['message'] = 'Error in request';
             }
 
@@ -200,6 +200,7 @@ class ProductController extends Controller
         $imageModel = ProductImage::findOne($imageId);
 
         if ($imageModel) {
+            \Cloudinary\Uploader::destroy($imageModel->image_url);
             $imageModel->delete();
         }
 
@@ -219,24 +220,46 @@ class ProductController extends Controller
         $images = UploadedFile::getInstancesByName('temp_images');
         if ($images) {
             foreach($images as $image) {
-                $ext = end((explode(".", $image->name)));
-                $image_url = Yii::$app->security->generateRandomString().".{$ext}";
-                $path = Yii::getAlias('@mainUpload') . '/'. $image_url;
-                $image->saveAs($path);
+                // $ext = end((explode(".", $image->name)));
+                // $image_url = Yii::$app->security->generateRandomString().".{$ext}";
+                // $path = Yii::getAlias('@mainUpload') . '/'. $image_url;
+                // $image->saveAs($path);
 
-                list($width, $height) = getimagesize($path);
+                // list($width, $height) = getimagesize($path);
+                // 
+                // $productImage = new ProductImage();
+                // $productImage->product_id = $model->id;
+                // $productImage->image_url = $image_url;
 
-                $productImage = new ProductImage();
-                $productImage->product_id = $model->id;
-                $productImage->image_url = $image_url;
+                // $productImage->save();
 
-                $productImage->save();
+                // $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $image_url, $width .'x' . $height, ['class' => 'file-preview-image']);
+                // $allImageConfig[] =[   
+                //         'caption' => 'Image',
+                //         'url' => Url::toRoute(['detach', 'id'=>$model->id, 'imageId' => $productImage->id])
+                // ];
+                // 
 
-                $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $image_url, $width .'x' . $height, ['class' => 'file-preview-image']);
-                $allImageConfig[] =[   
-                        'caption' => 'Image',
-                        'url' => Url::toRoute(['detach', 'id'=>$model->id, 'imageId' => $productImage->id])
-                ];
+                $uploadResult = \Cloudinary\Uploader::upload($image->tempName);
+
+                if (isset($uploadResult['public_id'])) {
+                    $image_url = $uploadResult['public_id'];
+                    $productImage = new ProductImage();
+                    $productImage->product_id = $model->id;
+                    $productImage->image_url = $image_url;
+
+                    $productImage->save();
+
+                    $allImages[] = '<img src="' . cloudinary_url($image_url, array("width" => 300, "height" => 450, "crop" => "fill")) .'" class="file-preview-image">';
+
+                    $allImageConfig[] =[   
+                            'caption' => 'Image',
+                            'frameAttr'=> [
+                                'style' => 'height:150px; width:100px;',
+                            ],
+                            'url' => Url::toRoute(['detach', 'id'=>$model->id, 'imageId' => $productImage->id])
+                    ];
+                }
             }
             
         }

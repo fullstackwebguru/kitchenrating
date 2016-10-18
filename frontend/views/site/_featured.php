@@ -35,7 +35,7 @@ use frontend\widgets\Rating;
                 <div class="media-left">
                   <a href="<?=Url::toRoute($product->getRoute())?>">
                     <span>Deal</span>
-                    <?= Yii::$app->imageCache->img('@mainUpload/' . $product->getMainImage()->image_url, '130x130', ['class' => 'file-preview-image']) ?>
+                    <img src="<?= cloudinary_url($product->getMainImage() ? $product->getMainImage()->image_url : '', array("width" => 130, "height" => 130, "crop" => "fill")) ?>">
                   </a>
                 </div>
                 <div class="media-body">

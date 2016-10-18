@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
 	      <div class="col-xs-12 col-sm-3">
 	        <a href="<?= Url::toRoute($guide->getRoute())?>" class="all_guides_list_single">
-	          <?= Yii::$app->imageCache->img('@mainUpload/' . $guide->image_url, '211x141', ['class' => 'file-preview-image']) ?>
+	        <img src="<?= cloudinary_url($guide->image_url, array("width" => 211, "height" => 141, "crop" => "fill")) ?>" class="file-preview-image">
 	          <div class="desc">
 	            <h2><?= $guide->title ?></h2>
 	            <p><?= $guide->meta_description ?></p>

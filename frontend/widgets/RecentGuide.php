@@ -48,7 +48,7 @@ class RecentGuide extends \yii\base\Widget
             $html .= '<li>';
             $itemTemplate = '<a href="'. Url::toRoute($guide->getRoute()) .'" class="media">';
             $itemTemplate .= '<div class="media-left">';
-            $itemTemplate .= Yii::$app->imageCache->img('@mainUpload/' . $guide->image_url, '263x198');
+            $itemTemplate .= '<img src="' . cloudinary_url($guide->image_url, array("width" => 62, "height" => 62, "crop" => "fill")) .'" class="file-preview-image">';
             $itemTemplate .= '</div>';
             $itemTemplate .= '<div class="media-body">';
             $itemTemplate .= '<h2>'. $guide->title . '</h2>';

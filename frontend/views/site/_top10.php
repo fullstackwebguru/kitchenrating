@@ -19,7 +19,7 @@ use frontend\widgets\Rating;
         <div class="col-xs-12 col-sm-4">
           <a href="<?= Url::toRoute($category->getRoute())?>" class="media single_ten_products">
             <div class="media-left">              
-              <?= Yii::$app->imageCache->img('@mainUpload/' . $category->image_url, '136x142', ['class' => 'file-preview-image']) ?>
+              <img src="<?= cloudinary_url($category->image_url, array("width" => 136, "height" => 142, "crop" => "fill")) ?>" class="file-preview-image">
             </div>
             <div class="media-body">
               <?= Rating::widget(['rating' => $category->rating]) ?>

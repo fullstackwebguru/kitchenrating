@@ -24,7 +24,8 @@ $gridColumns = [
         'width'=>'80px',
         'format' => 'raw',
         'value'=>function ($model, $key, $index, $widget) { 
-            return Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '80x80', ['class' => 'file-preview-image']);
+            // return Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '80x80', ['class' => 'file-preview-image']);
+            return '<img src="' . cloudinary_url($model->image_url, array("width" => 80, "height" => 80, "crop" => "fill")) .'" class="file-preview-image">';
         },
     ],
     [

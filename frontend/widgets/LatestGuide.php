@@ -54,7 +54,7 @@ class LatestGuide extends \yii\base\Widget
               <div class="single_guided_box">
                 <a href="';
             $html .= Url::toRoute($guide->getRoute()) . '" class="img_thumb">';
-            $html .= Yii::$app->imageCache->img('@mainUpload/' . $guide->image_url, '263x198', ['class' => 'file-preview-image']);
+            $html .= '<img src="' . cloudinary_url($guide->image_url, array("width" => 263, "height" => 198, "crop" => "fill")) .'" class="file-preview-image">';
             $html .= '</a>';
             $html .= Html::a($guide->title, $guide->getRoute(), ['class' => 'guide_title']);
             $html .= '</div>

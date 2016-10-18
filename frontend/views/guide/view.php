@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-xs-12 col-sm-8">
           <div class="page_contents">
             <a href="javascript:void(0)" class="thumbnail">
-              <?= Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '752x352', ['alt' => $model->title]) ?>
+            <img src="<?= cloudinary_url($model->image_url, array("width" => 752, "height" => 352, "crop" => "fill")) ?>" alt="<?=$model->title ?>">
             </a>
             <div class="page_meta">
               On <?= Yii::$app->formatter->asDate($model->created_at, 'long'); ?>

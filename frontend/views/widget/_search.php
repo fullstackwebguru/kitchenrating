@@ -9,7 +9,7 @@ use frontend\widgets\Rating;
   <?php foreach($top10s as $category) { ?>
       <a href="<?= Url::toRoute($category->getRoute())?>" class="media single_ten_products">
         <div class="pull-left">              
-          <?= Yii::$app->imageCache->img('@mainUpload/' . $category->image_url, '50x50', ['class' => 'file-preview-image']) ?>
+        <img src="<?= cloudinary_url($category->image_url, array("width" => 50, "height" => 50, "crop" => "fill")) ?>" class="file-preview-image">
         </div>
         <div>
           <?= Rating::widget(['rating' => $category->rating]) ?>

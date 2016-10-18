@@ -84,6 +84,7 @@ class GuideController extends Controller
     public function actionDetach($id) {
         $model = $this->findModel($id);
         $output = [];
+        \Cloudinary\Uploader::destroy($model->image_url);
         $model->image_url = '';
         $model->save();
         echo json_encode($output);
@@ -98,18 +99,37 @@ class GuideController extends Controller
         $image = UploadedFile::getInstanceByName('new_guide_image');
         if ($image) {
 
-            $ext = end((explode(".", $image->name)));
-            $model->image_url = Yii::$app->security->generateRandomString().".{$ext}";
-            $path = Yii::getAlias('@mainUpload') . '/'. $model->image_url;
-            $image->saveAs($path);
+            // $ext = end((explode(".", $image->name)));
+            // $model->image_url = Yii::$app->security->generateRandomString().".{$ext}";
+            // $path = Yii::getAlias('@mainUpload') . '/'. $model->image_url;
+            // $image->saveAs($path);
 
-            $model->save();
+            // $model->save();
 
-            $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '200x150', ['class' => 'file-preview-image']);
-            $allImageConfig[] =[   
-                    'caption' => 'Current Image',
-                    'url' => Url::toRoute(['detach', 'id'=>$model->id])
-            ];
+            // $allImages[] = Yii::$app->imageCache->img('@mainUpload/' . $model->image_url, '200x150', ['class' => 'file-preview-image']);
+            // $allImageConfig[] =[   
+            //         'caption' => 'Current Image',
+            //         'url' => Url::toRoute(['detach', 'id'=>$model->id])
+            // ];
+
+            $uploadResult = \Cloudinary\Uploader::upload($image->tempName);
+
+            if (isset($uploadResult['public_id'])) {
+                $image_url = $uploadResult['public_id'];
+                $model->image_url = $image_url;
+
+                $model->save();
+
+                $allImages[] = '<img src="' . cloudinary_url($image_url, array("width" => 300, "height" => 450, "crop" => "fill")) .'" class="file-preview-image">';
+
+                $allImageConfig[] =[   
+                        'caption' => 'Image',
+                        'frameAttr'=> [
+                            'style' => 'height:150px; width:100px;',
+                        ],
+                        'url' => Url::toRoute(['detach', 'id'=>$model->id])
+                ];
+            }
 
             $output['initialPreview'] = $allImages;
             $output['initialPreviewConfig'] = $allImageConfig;

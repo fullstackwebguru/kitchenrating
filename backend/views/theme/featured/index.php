@@ -26,7 +26,8 @@ $gridColumns = [
 
             $pms = $model->productImages;
             if ($pms & count($pms) > 0) {
-                return Yii::$app->imageCache->img('@mainUpload/' . $pms[0]->image_url, '80x80', ['class' => 'file-preview-image']);
+                // return Yii::$app->imageCache->img('@mainUpload/' . $pms[0]->image_url, '80x80', ['class' => 'file-preview-image']);
+                return '<img src="' . cloudinary_url($pms[0]->image_url, array("width" => 80, "height" => 80, "crop" => "fill")) .'" class="file-preview-image">';
             } else {
                 return "";
             }
