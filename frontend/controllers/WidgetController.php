@@ -7,6 +7,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use common\models\Category;
 use common\models\Newsletter;
 use frontend\models\CategorySearch;
@@ -35,7 +36,7 @@ class WidgetController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'newsletter' => ['POST'],
-                    'search' => ['POST']
+                    'search' => ['POST', 'GET']
                 ],
             ],
         ];
@@ -48,12 +49,34 @@ class WidgetController extends Controller
      */
     public function actionSearch()
     {
-        $searchModel = new CategorySearch(Yii::$app->request->post());
-        $top10s = $searchModel->search([])->getModels();    
+        $query = Yii::$app->request->get();
+        $searchModel = new CategorySearch($query);
+        $top10s = $searchModel->search([])->getModels();
 
-        return $this->renderPartial('_search', [
-            'top10s' => $top10s
-        ]);
+        $top10Results = [];
+
+        foreach ($top10s as $top10) {
+            // $top10Results['suggestions'][] = [
+            //     'value' => $top10->id,
+            //     'data' => [
+            //         'icon' => cloudinary_url($top10->image_url, array("width" => 359, "height" => 280, "crop" => "fill")),
+            //         'url' => Url::toRoute($top10->getRoute()),
+            //         'title' => $top10->title,
+            //         'id' => $top10->id
+            //     ]
+            // ];
+            // 
+            
+            $top10Results[] = [
+                'value' => $top10->title,
+                'icon' => cloudinary_url($top10->image_url, array("width" => 359, "height" => 280, "crop" => "fill")),
+                'url' => Url::toRoute($top10->getRoute()),
+                'id' => $top10->id
+            ];
+            
+        };
+
+        echo json_encode($top10Results);
     }
 
     /**

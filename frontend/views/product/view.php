@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	          	<?php 
 					foreach($model->productImages as $pImage) {
 						$smImg = cloudinary_url($pImage->image_url, array("width" => 550, "height" => 550, "crop" => "fill"));
-						$smImg = cloudinary_url($pImage->image_url, array("width" => 113, "height" => 113, "crop" => "fill"));
+						$mainImg = cloudinary_url($pImage->image_url, array("width" => 113, "height" => 113, "crop" => "fill"));
 	          	?>
 	            <a href="#" data-sm-img="<?= $smImg ?>" data-lg-img="<?= $smImg ?> "><img  src="<?= $mainImg ?>" alt="tilte"></a>
 	            <?php

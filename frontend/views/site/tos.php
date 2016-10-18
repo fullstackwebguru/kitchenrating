@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'About';
+$this->title = 'Tos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul>
           <li><a href="#">Home</a></li>
           <li><span>/</span></li>
-          <li><strong><?=$this->title ?></strong></li>
+          <li><strong>Privacy policy</strong></li>
         </ul>
       </div>
       <div class="all_guides_list">

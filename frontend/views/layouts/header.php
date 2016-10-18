@@ -17,11 +17,6 @@ use frontend\widgets\SearchBox;
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <!-- <div class="pull-right">
-          <div class="header_search_box">
-            <?= SearchBox::widget(['type'=>'top']) ?>
-          </div>
-        </div> -->
         <a href="<?=Url::toRoute(['/'])?>" class="navbar-brand top_logo">
           KitchenRatings
         </a>

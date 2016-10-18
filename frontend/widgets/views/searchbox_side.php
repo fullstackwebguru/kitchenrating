@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 
 ?>
-<form action="<?=Url::toRoute($actionUrl)?>" method="post" class="tw_search">
+<form action="<?=Url::toRoute($actionUrl)?>" method="post" class="tw_search" id="tw_search_side">
 
 <div class="sidebar_search">
   <input type="text" name="<?= $name ?>" autocomplete="off" placeholder="searching for...">

@@ -10,10 +10,10 @@ use yii\helpers\Html;
         <div class="pull-right">
             <ul class="nav nav-pills">
                 <li><?=  Html::a('Home',['/site']) ?></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">ToS</a></li>
-                <li><a href="#">Disclamer</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><?=  Html::a('Privacy',['/site/policy']) ?></li>
+                <li><?=  Html::a('ToS',['/site/tos']) ?></li>
+                <li><?=  Html::a('Disclamer',['/site/disclaimer']) ?></li>
+                <li><?=  Html::a('Contact',['/site/contact']) ?></li>
             </ul>
         </div>
         <div class="pull-left">
