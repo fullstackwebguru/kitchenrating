@@ -9,6 +9,7 @@ use backend\models\GuideSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\helpers\Json;
 
 use kartik\detail\DetailView;
@@ -29,6 +30,16 @@ class GuideController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'create','view', 'update', 'delete' ,'detach', 'upload'],
+                        'roles' => ['updateCatalog']
+                    ]
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
