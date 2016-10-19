@@ -45,6 +45,26 @@ echo Form::widget([
 echo Form::widget([       // 3 column layout
     'model'=>$model,
     'form'=>$form,
+    'columns'=>4,
+    'attributes'=>[
+        'rank_option1'=>[
+            'type'=>Form::INPUT_TEXT, 
+            'options'=>['placeholder'=>'Enter title for option1...']
+        ],
+        'rank_option2'=>[
+            'type'=>Form::INPUT_TEXT, 
+            'options'=>['placeholder'=>'Enter title for option1...']
+        ],
+        'rank_option3'=>[
+            'type'=>Form::INPUT_TEXT, 
+            'options'=>['placeholder'=>'Enter title for option1...']
+        ]
+    ]
+]);
+
+echo Form::widget([       // 3 column layout
+    'model'=>$model,
+    'form'=>$form,
     'columns'=>2,
     'attributes'=>[
         'color'=>[

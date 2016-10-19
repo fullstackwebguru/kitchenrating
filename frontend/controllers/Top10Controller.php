@@ -32,10 +32,18 @@ class Top10Controller extends Controller
 
     public function actionGenerate($id)
     {
-        $post['quality_level'] = Yii::$app->request->post('quality_level',0);
-        $post['trust_level'] = Yii::$app->request->post('trust_level',0);
-        $post['price_level'] = Yii::$app->request->post('price_level',0);
+        if (Yii::$app->request->post('rank_option1')) {
+            $post['rank_option1'] = Yii::$app->request->post('rank_option1',0);
+            $post['rank_option2'] = Yii::$app->request->post('rank_option2',0);
+            $post['rank_option3'] = Yii::$app->request->post('rank_option3',0);
+        } else {
+            $post['rank_option1'] = 100;
+            $post['rank_option2'] = 50;
+            $post['rank_option3'] = 0;
+        }
+
         arsort($post);
+        
         $model = $this->findModel($id);
         $products = $model->findTop10Products($post)->all();
         foreach ($products as $i => $product) {

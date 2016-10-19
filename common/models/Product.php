@@ -20,9 +20,9 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $store_id
  * @property integer $num_rating
  * @property double $score
- * @property integer $quality_level
- * @property integer $price_level
- * @property integer $trust_level
+ * @property integer $rank_option1
+ * @property integer $rank_option2
+ * @property integer $rank_option3
  * @property integer $status
  * @property string $color
  * @property string $meta_description
@@ -76,12 +76,12 @@ class Product extends ActiveRecord
         return [
             [['category_id', 'num_rating'], 'integer'],
             [['title', 'category_id', 'store_id', 'product_url', 'rating','num_rating', 'sku', 'meta_keywords', 'meta_description' ], 'required'],
-            [['quality_level', 'price_level', 'trust_level', 'score'], 'required'],
+            [['rank_option1', 'rank_option2', 'rank_option3', 'score'], 'required'],
             [['description','color','product_url',], 'string'],
             [['rating'], 'number', 'max' => 5],
             [['score'], 'number', 'max' => 10],
             [['title', 'sku', 'slug'], 'string', 'max' => 255],
-            [['quality_level', 'price_level', 'trust_level'], 'integer', 'min' => 0 ,  'max' => 100],
+            [['rank_option1', 'rank_option2', 'rank_option3'], 'integer', 'min' => 0 ,  'max' => 10],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
             [['store_id'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['store_id' => 'id']],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -107,9 +107,9 @@ class Product extends ActiveRecord
             'rating' => 'Rating',
             'num_rating' => 'Num Rating',
             'score' => 'Score',
-            'quality_level' => 'Quality',
-            'trust_level' => 'Trust In Brand',
-            'price_level' => 'Price',
+            'rank_option1' => 'Ranking Option 1',
+            'rank_option2' => 'Ranking Option 2',
+            'rank_option3' => 'Ranking Option 3',
             'color' => 'Color',
             'status' => 'Status',
             'meta_keywords' => 'SEO Keywords',
@@ -169,7 +169,7 @@ class Product extends ActiveRecord
             SELECT p.*, @curRank:= @curRank + 1 AS rank 
             FROM ' . self::tableName() . ' p, (SELECT @curRank:= 0) r  
             WHERE p.category_id = :category_id 
-            ORDER BY p.score DESC, p.trust_level DESC, p.quality_level DESC, p.price_level DESC
+            ORDER BY p.score DESC, p.rank_option1 DESC, p.rank_option2 DESC, p.rank_option3 DESC
         ) as rs 
         WHERE rs.id = :product_id', 
         [

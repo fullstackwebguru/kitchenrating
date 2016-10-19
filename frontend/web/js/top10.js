@@ -1,9 +1,9 @@
 (function($){
 
 var rangeObj = {
-	price_level :  0,
-	quality_level : 50,
-	trust_level : 100
+	rank_option1 : 100,
+	rank_option2 : 50,
+	rank_option3 : 0
 };
 	
 $( ".rs_filter" ).slider({

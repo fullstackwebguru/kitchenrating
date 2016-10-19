@@ -70,6 +70,7 @@ class Category extends ActiveRecord
         return [
             [['parent_id'], 'integer'],
             [['title','status','meta_keywords', 'meta_description'], 'required'],
+            [['rank_option1','rank_option2','rank_option3'],'required'],
             [['rating'], 'number', 'max' => 5],
             [['title', 'slug', 'color'], 'string', 'max' => 255],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],
@@ -93,6 +94,9 @@ class Category extends ActiveRecord
             'status' => 'Status',
             'image_url' => 'Image',
             'temp_image' => 'Image',
+            'rank_option1' => 'Ranking Option 1',
+            'rank_option2' => 'Ranking Option 2',
+            'rank_option3' => 'Ranking Option 3',
             'meta_keywords' => 'SEO Keywords',
             'meta_description' => 'SEO description',
             'created_at' => 'Created At',

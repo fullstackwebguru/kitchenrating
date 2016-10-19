@@ -123,16 +123,19 @@ $attributes = [
         'value'=>$model->score
     ],
     [
-        'attribute'=>'price_level', 
-        'value'=>$model->price_level
+        'attribute'=>'rank_option1', 
+        'label'=>'Rank Option - ' . $model->category->rank_option1,
+        'value'=>$model->rank_option1
     ],
     [
-        'attribute'=>'quality_level', 
-        'value'=>$model->quality_level
+        'attribute'=>'rank_option2', 
+        'label'=>'Rank Option - ' . $model->category->rank_option2,
+        'value'=>$model->rank_option2
     ],
     [
-        'attribute'=>'trust_level', 
-        'value'=>$model->trust_level
+        'attribute'=>'rank_option3', 
+        'label'=>'Rank Option - ' . $model->category->rank_option3,
+        'value'=>$model->rank_option3,
     ],
     [
         'group'=>true,

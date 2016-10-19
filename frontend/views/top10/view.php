@@ -32,30 +32,30 @@ Top10JsAsset::register($this);
 	      <div class="row">
 	        <div class="col-xs-12 col-sm-4">
 	          <div class="rs_price_filter">
-	            <h2 class="filter_title">Price</h2>
+	            <h2 class="filter_title"><?= $model->rank_option1 ?></h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter" data-value="0" data-key="price_level"></div>
+	              <div class="rs_filter" data-value="100" data-key="rank_option1"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>
 	        </div>
 	        <div class="col-xs-12 col-sm-4">
 	          <div class="rs_price_filter">
-	            <h2 class="filter_title">Quality</h2>
+	            <h2 class="filter_title"><?= $model->rank_option2 ?></h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter"  data-value="50" data-key="quality_level"></div>
+	              <div class="rs_filter"  data-value="50" data-key="rank_option2"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>
 	        </div>
 	        <div class="col-xs-12 col-sm-4">
 	          <div class="rs_price_filter">
-	            <h2 class="filter_title">Trust</h2>
+	            <h2 class="filter_title"><?= $model->rank_option3 ?></h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter"  data-value="100" data-key="trust_level"></div>
+	              <div class="rs_filter"  data-value="0" data-key="rank_option3"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>
@@ -81,7 +81,7 @@ Top10JsAsset::register($this);
 	<div class="container">
 	  <div class="product_list" data-action="<?=Url::toRoute(['/top10/generate','id'=>$model->id]) ?>">
 	  	<?= $this->render('_productList', [
-			'products' => $model->findTop10Products([])->all(),
+			'products' => $model->findTop10Products(['rank_option1' => 100, 'rank_option2' => 50, 'rank_option3' => 0 ])->all(),
 		]) ?>
 	  </div>
 	</div>

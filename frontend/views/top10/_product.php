@@ -25,21 +25,21 @@ use yii\helpers\Url;
           <span class="rate_title"><?= $product->num_rating ?> ratings</span>
           <div class="product_progress">
             <div class="sinlge_progress">
-              <h5>Price</h5>
+              <h5><?= $product->category->rank_option1 ?></h5>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->price_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->price_level * 10 ?>%"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->rank_option1?>" aria-valuemin="0" aria-valuemax="10" style="width:<?=$product->rank_option1 * 10 ?>%"></div>
               </div>
             </div>
             <div class="sinlge_progress">
-              <h5>Quality</h5>
+              <h5><?= $product->category->rank_option2 ?></h5>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->quality_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->quality_level * 10 ?>%"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->rank_option2?>" aria-valuemin="0" aria-valuemax="10" style="width:<?=$product->rank_option2 * 10 ?>%"></div>
               </div>
             </div>
             <div class="sinlge_progress">
-              <h5>Trust in brand</h5>
+              <h5><?= $product->category->rank_option3 ?></h5>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->trust_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->trust_level * 10 ?>%"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->rank_option3?>" aria-valuemin="0" aria-valuemax="10" style="width:<?=$product->rank_option3 * 10 ?>%"></div>
               </div>
             </div>
           </div>

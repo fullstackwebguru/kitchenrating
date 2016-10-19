@@ -57,6 +57,24 @@ $attributes = [
     ],
     [
         'group'=>true,
+        'label'=>'Raking Info',
+        'rowOptions'=>['class'=>'info'],
+    ],
+    [
+        'attribute'=>'rank_option1', 
+        'value'=>$model->rank_option1,
+
+    ],
+    [
+        'attribute'=>'rank_option2', 
+        'value'=>$model->rank_option2,
+    ],
+    [
+        'attribute'=>'rank_option3', 
+        'value'=>$model->rank_option3
+    ],
+    [
+        'group'=>true,
         'label'=>'SEO Information',
         'rowOptions'=>['class'=>'info']
     ],

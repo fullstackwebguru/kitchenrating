@@ -91,17 +91,17 @@ echo Form::widget([       // 3 column layout
     'form'=>$form,
     'columns'=>4,
     'attributes'=>[
-        'price_level'=>[
+        'rank_option1'=>[
             'type'=>Form::INPUT_TEXT, 
-            'options'=>['placeholder'=>'Enter price level...']
+            'options'=>['placeholder'=>'Enter level for option1...']
         ],
-        'quality_level'=>[
+        'rank_option2'=>[
             'type'=>Form::INPUT_TEXT, 
-            'options'=>['placeholder'=>'Enter quality level...']
+            'options'=>['placeholder'=>'Enter level for option1...']
         ],
-        'trust_level'=>[
+        'rank_option3'=>[
             'type'=>Form::INPUT_TEXT, 
-            'options'=>['placeholder'=>'Enter trust level...']
+            'options'=>['placeholder'=>'Enter level for option1...']
         ],
         'score'=>[
             'type'=>Form::INPUT_TEXT, 

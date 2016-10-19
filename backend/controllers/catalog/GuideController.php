@@ -206,10 +206,17 @@ class GuideController extends Controller
             $image = UploadedFile::getInstance($model, 'temp_image');
             if ($image) {
 
-                $ext = end((explode(".", $image->name)));
-                $model->image_url = Yii::$app->security->generateRandomString().".{$ext}";
-                $path = Yii::getAlias('@mainUpload') . '/'. $model->image_url;
-                $image->saveAs($path);
+                // $ext = end((explode(".", $image->name)));
+                // $model->image_url = Yii::$app->security->generateRandomString().".{$ext}";
+                // $path = Yii::getAlias('@mainUpload') . '/'. $model->image_url;
+                // $image->saveAs($path);
+
+                $uploadResult = \Cloudinary\Uploader::upload($image->tempName);
+
+                if (isset($uploadResult['public_id'])) {
+                    $image_url = $uploadResult['public_id'];
+                    $model->image_url = $image_url;
+                }
             }
             
             if ($model->save())  {
