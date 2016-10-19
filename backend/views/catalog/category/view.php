@@ -56,6 +56,14 @@ $attributes = [
         ],
     ],
     [
+        'attribute'=>'rating', 
+        'value'=>$model->rating
+    ],
+    [
+        'attribute'=>'num_rating', 
+        'value'=>$model->num_rating
+    ],
+    [
         'group'=>true,
         'label'=>'Raking Info',
         'rowOptions'=>['class'=>'info'],

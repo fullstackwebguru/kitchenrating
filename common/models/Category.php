@@ -68,7 +68,7 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id'], 'integer'],
+            [['parent_id','num_rating'], 'integer'],
             [['title','status','meta_keywords', 'meta_description'], 'required'],
             [['rank_option1','rank_option2','rank_option3'],'required'],
             [['rating'], 'number', 'max' => 5],
@@ -94,6 +94,8 @@ class Category extends ActiveRecord
             'status' => 'Status',
             'image_url' => 'Image',
             'temp_image' => 'Image',
+            'rating' => 'Rating',
+            'num_rating' => 'Num Rating',
             'rank_option1' => 'Ranking Option 1',
             'rank_option2' => 'Ranking Option 2',
             'rank_option3' => 'Ranking Option 3',

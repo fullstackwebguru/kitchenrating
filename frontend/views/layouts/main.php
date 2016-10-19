@@ -40,7 +40,7 @@ AppAsset::register($this);
     <i class="fa fa-twitter"></i>
   </a>
   <a href="https://plus.google.com/share?url=https://kitchenratings.com" class="btnShare">
-    <span>Google Share</span>
+    <span>Google</span>
     <i class="fa fa-google"></i>
   </a>
 </div>
