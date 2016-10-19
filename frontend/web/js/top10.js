@@ -1,13 +1,13 @@
 (function($){
 
 var rangeObj = {
-	price_level :  20,
+	price_level :  0,
 	quality_level : 50,
 	trust_level : 100
 };
 	
 $( ".rs_filter" ).slider({
-	step:20,
+	step:50,
 	change: function( event, ui ) {
 		$(this).attr('data-value', ui.value);
 		renderChange();
@@ -20,12 +20,12 @@ $( ".rs_filter" ).each(function(){
 $( ".rs_filter_dec" ).on('click',function(e){
 	e.preventDefault();
 	var sliderSelect = $(this).closest('.rs_filter_group').find('.rs_filter');
-	sliderSelect.slider('value',sliderSelect.slider("value")-20);
+	sliderSelect.slider('value',sliderSelect.slider("value")-50);
 })
 $( ".rs_filter_inc" ).on('click',function(e){
 	e.preventDefault();
 	var sliderSelect = $(this).closest('.rs_filter_group').find('.rs_filter');
-	sliderSelect.slider('value',sliderSelect.slider("value")+20);
+	sliderSelect.slider('value',sliderSelect.slider("value")+50);
 })
 
 function renderChange() {

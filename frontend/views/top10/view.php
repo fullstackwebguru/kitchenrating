@@ -35,7 +35,7 @@ Top10JsAsset::register($this);
 	            <h2 class="filter_title">Price</h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter" data-value="20" data-key="price_level"></div>
+	              <div class="rs_filter" data-value="0" data-key="price_level"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>

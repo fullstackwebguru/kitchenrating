@@ -27,19 +27,19 @@ use yii\helpers\Url;
             <div class="sinlge_progress">
               <h5>Price</h5>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->price_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->price_level?>%"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->price_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->price_level * 10 ?>%"></div>
               </div>
             </div>
             <div class="sinlge_progress">
               <h5>Quality</h5>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->quality_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->quality_level?>%"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->quality_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->quality_level * 10 ?>%"></div>
               </div>
             </div>
             <div class="sinlge_progress">
               <h5>Trust in brand</h5>
               <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->trust_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->trust_level?>%"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="<?=$product->trust_level?>" aria-valuemin="0" aria-valuemax="100" style="width:<?=$product->trust_level * 10 ?>%"></div>
               </div>
             </div>
           </div>
