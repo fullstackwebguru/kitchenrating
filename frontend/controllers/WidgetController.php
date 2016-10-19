@@ -87,12 +87,20 @@ class WidgetController extends Controller
     public function actionNewsletter()
     { 
         $model = new Newsletter();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', 'Thank you. Now ' . $model->email .' is part of our campaign list.');
-        } else {
-            Yii::$app->getSession()->setFlash('error', 'Sorry, We can\'t process this request');
-        }
+        $request = Yii::$app->request;
+        if ($request->post('tw_newsletter_side') || $request->post('tw_newsletter_footer')) {
+            
+            $model->email =  $request->post('tw_newsletter_footer') ? $request->post('tw_newsletter_footer') : $request->post('tw_newsletter_side');
 
+            if ($model->save()) {
+                Yii::$app->getSession()->setFlash('success', 'Thank you. Now ' . $model->email .' is part of our campaign list.');
+            } else {
+                Yii::$app->getSession()->setFlash('error', 'Sorry, We can\'t process this request');
+            }    
+        } else {
+
+        }
+        
         return $this->goBack();
     }
 }
