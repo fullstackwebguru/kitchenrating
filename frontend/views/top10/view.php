@@ -69,7 +69,7 @@ Top10JsAsset::register($this);
 	        <p><i class="fa fa-comments" aria-hidden="true"></i> Based on <?= $model->num_rating ?> customer reviews</p>
 	      </div>
 	      <div class="pull-left">
-	        <p><i class="fa fa-question-circle" aria-hidden="true"></i> Wondering how we rank the products?</p>
+	        <p><a href="javascript:void(0)" class="goto_section_bottom"><i class="fa fa-question-circle" aria-hidden="true"></i> </a> Wondering how we rank the products?</p>
 	      </div>
 	      <div class="clear_fix"></div>
 	    </div>
@@ -87,7 +87,7 @@ Top10JsAsset::register($this);
 	</div>
 </div>
       
-<div class="default_article_section product_list_10_bottom">
+<div class="default_article_section product_list_10_bottom" id="site_section_bottom">
 <div class="container-fluid">
   <div class="title_group text-center">
     <h2>Wondering how we ranked the products?</h2>

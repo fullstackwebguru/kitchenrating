@@ -1,5 +1,10 @@
 (function($){
 
+$('a.goto_section_bottom').click(function(e) {
+	$.mPageScroll2id("scrollTo", "site_section_bottom");
+});
+
+
 if ($('#tw_search_banner').length > 0) {
 	$('#tw_search_banner').submit(function (e) {
 		e.preventDefault();
