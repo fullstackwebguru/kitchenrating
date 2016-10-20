@@ -1,7 +1,7 @@
 <?php
 
 \Cloudinary::config(array( 
-  "cloud_name" => "djmzhkp6f", 
-  "api_key" => "199667545241586", 
-  "api_secret" => "qdweA-fBYOdWVXEkcY8KoD926gQ" 
+  "cloud_name" => "hnhz4whuy", 
+  "api_key" => "939862129447915", 
+  "api_secret" => "6oKpoOrjtO0UWnoOkGbPWXcZODM" 
 ));
