@@ -11,6 +11,17 @@ use frontend\widgets\NewsletterBox;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerMetaTag([
+            'name'=>'keywords',
+            'content' => $model->meta_keywords
+        ]);
+
+$this->registerMetaTag([
+            'name'=>'description',
+            'content' => $model->meta_description
+        ]);
+        
 ?>
 <div class="single_page">
     <div class="container">

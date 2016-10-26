@@ -13,6 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
+use common\models\Page;
 use common\models\Product;
 use common\models\Category;
 use common\models\Guide;
@@ -39,6 +40,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
+        $model = $this->findModel('home');
+
         $featuredProducts = Product::find()->where(['featured' => true])->all();
         $popularTop10 = Category::find()->where(['popular' => true])->all();
         $guides = Guide::find()->orderBy(['created_at' => 'desc'])->limit(4)->all();
@@ -46,7 +50,8 @@ class SiteController extends Controller
         return $this->render('index', [
             'featuredProducts' => $featuredProducts,
             'popularTop10' => $popularTop10,
-            'guides' => $guides
+            'guides' => $guides,
+            'model' => $model
         ]);
     }
 
@@ -57,27 +62,42 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $model = $this->findModel('about');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     public function actionPolicy()
     {
-        return $this->render('policy');
+        $model = $this->findModel('privacy');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     public function actionDisclaimer()
     {
-        return $this->render('disclaimer');
+        $model = $this->findModel('disclaimer');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     public function actionTos()
     {
-        return $this->render('tos');
+        $model = $this->findModel('tos');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     public function actionContact()
     {
-        return $this->render('contact');
+        $model = $this->findModel('contact');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     /**
@@ -127,5 +147,21 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Finds the Page model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Page the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Page::findOne(['page_id'=>$id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

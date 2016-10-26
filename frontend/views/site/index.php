@@ -5,7 +5,18 @@
 use frontend\widgets\LatestGuide;
 use frontend\widgets\NewsletterBox;
 
-$this->title = 'Kitchen Rating';
+$this->title = $model->title;
+
+$this->registerMetaTag([
+            'name'=>'keywords',
+            'content' => $model->meta_keywords
+        ]);
+
+$this->registerMetaTag([
+            'name'=>'description',
+            'content' => $model->meta_description
+        ]);
+
 ?>
     
     <?= $this->render('_banner', [

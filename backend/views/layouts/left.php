@@ -41,6 +41,19 @@
                     ['label' => 'Theme', 'options' => ['class' => 'header']],
                     ['label' => 'Featured', 'icon' => 'fa fa-dashboard', 'url' => ['/theme/featured']],
                     ['label' => 'Popular', 'icon' => 'fa fa-dashboard', 'url' => ['/theme/popular']],
+                    [
+                        'label' => 'Pages',
+                        'icon' => 'fa fa-book',
+                        'url' => '#',
+                        'items' => [
+                            ['label' => 'Home', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/home'],],
+                            ['label' => 'About', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/view','id'=>'about'],],
+                            ['label' => 'Privacy', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/view','id'=>'privacy'],],
+                            ['label' => 'Tos', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/view','id'=>'tos'],],
+                            ['label' => 'Disclaimer', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/view','id'=>'disclaimer'],],
+                            ['label' => 'Contact', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/view','id'=>'contact'],],
+                        ],
+                    ],
                 ],
             ]
         ) ?>

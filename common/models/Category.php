@@ -70,7 +70,7 @@ class Category extends ActiveRecord
         return [
             [['parent_id','num_rating'], 'integer'],
             [['title','status','meta_keywords', 'meta_description'], 'required'],
-            [['rank_option1','rank_option2','rank_option3'],'required'],
+            [['rating','rank_option1','rank_option2','rank_option3'],'required'],
             [['rating'], 'number', 'max' => 5],
             [['title', 'slug', 'color'], 'string', 'max' => 255],
             [['parent_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['parent_id' => 'id']],

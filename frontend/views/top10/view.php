@@ -15,6 +15,16 @@ $this->title = 'Top 10 - '. $model->title;
 $this->params['breadcrumbs'][] = $this->title;
 
 Top10JsAsset::register($this);
+
+$this->registerMetaTag([
+            'name'=>'keywords',
+            'content' => $model->meta_keywords
+        ]);
+
+$this->registerMetaTag([
+            'name'=>'description',
+            'content' => $model->meta_description
+        ]);
 ?>
 
 <div class="bg_image_section">
