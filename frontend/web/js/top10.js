@@ -1,9 +1,9 @@
 (function($){
 
 var rangeObj = {
-	rank_option1 : 100,
+	rank_option1 : 50,
 	rank_option2 : 50,
-	rank_option3 : 0
+	rank_option3 : 50
 };
 	
 $( ".rs_filter" ).slider({

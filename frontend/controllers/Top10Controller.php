@@ -37,12 +37,16 @@ class Top10Controller extends Controller
             $post['rank_option2'] = Yii::$app->request->post('rank_option2',0);
             $post['rank_option3'] = Yii::$app->request->post('rank_option3',0);
         } else {
-            $post['rank_option1'] = 100;
+            $post['rank_option1'] = 50;
             $post['rank_option2'] = 50;
-            $post['rank_option3'] = 0;
+            $post['rank_option3'] = 50;
         }
 
         arsort($post);
+
+        // print_r($post);
+
+        // exit;
         
         $model = $this->findModel($id);
         $products = $model->findTop10Products($post)->all();

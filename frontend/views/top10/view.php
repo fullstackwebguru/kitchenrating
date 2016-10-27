@@ -45,7 +45,7 @@ $this->registerMetaTag([
 	            <h2 class="filter_title"><?= $model->rank_option1 ?></h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter" data-value="100" data-key="rank_option1"></div>
+	              <div class="rs_filter" data-value="50" data-key="rank_option1"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>
@@ -65,7 +65,7 @@ $this->registerMetaTag([
 	            <h2 class="filter_title"><?= $model->rank_option3 ?></h2>
 	            <div class="rs_filter_group">
 	              <div class="rs_filter_dec"><i class="fa fa-minus" aria-hidden="true"></i></div>
-	              <div class="rs_filter"  data-value="0" data-key="rank_option3"></div>
+	              <div class="rs_filter"  data-value="50" data-key="rank_option3"></div>
 	              <div class="rs_filter_inc"><i class="fa fa-plus" aria-hidden="true"></i></div>
 	            </div>
 	          </div>
