@@ -52,6 +52,7 @@
                             ['label' => 'Tos', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/view','id'=>'tos'],],
                             ['label' => 'Disclaimer', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/view','id'=>'disclaimer'],],
                             ['label' => 'Contact', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/view','id'=>'contact'],],
+                            ['label' => 'Top10', 'icon' => 'fa fa-file-code-o', 'url' => ['/page/top10'],],
                         ],
                     ],
                 ],

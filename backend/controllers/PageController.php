@@ -35,6 +35,21 @@ class PageController extends Controller
         }
     }
 
+    public function actionTop10()
+    {
+        $model = $this->findModel('top10');
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->render('top10', [
+                'model' => $model
+            ]);
+        } else {
+            return $this->render('top10', [
+                'model' => $model
+            ]);
+        }
+    }
+
     public function actionView($id) {
         $model = $this->findModel($id);
 

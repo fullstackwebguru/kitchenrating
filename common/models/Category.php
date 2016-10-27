@@ -148,9 +148,9 @@ class Category extends ActiveRecord
         }
 
         $orderByStr = implode(',', $orderSet);
-        $query = $this->getProducts()->orderBy($orderByStr)->limit(10);
+        $query = $this->getProducts()->select(['*','(score*300 + rank_option1*' .$orderBy['rank_option1']. ' + rank_option2*' .$orderBy['rank_option1'] . ' + rank_option3*'. $orderBy['rank_option3'] . ') as rank'])->orderBy('rank DESC')->limit(10);
 
-        return $query;
+        return $query->all();
     }
 
     /**

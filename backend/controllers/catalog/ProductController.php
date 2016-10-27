@@ -39,7 +39,7 @@ class ProductController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create','view', 'update', 'delete' ,'detach', 'upload'],
+                        'actions' => ['index', 'create','view', 'update', 'delete' ,'detach', 'upload','addinfo','deleteinfo'],
                         'roles' => ['updateCatalog']
                     ]
                 ]
