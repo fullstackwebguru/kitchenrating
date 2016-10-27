@@ -35,6 +35,7 @@ use yii\behaviors\SluggableBehavior;
  * @property Store $store
  * @property ProductImage[] $productImages
  * @property ProductInfo[] $productInfos
+ * @property ProductColor[] $productColors
  */
 
 class Product extends ActiveRecord
@@ -149,6 +150,14 @@ class Product extends ActiveRecord
     public function getProductInfos()
     {
         return $this->hasMany(ProductInfo::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductColors()
+    {
+        return $this->hasMany(ProductColor::className(), ['product_id' => 'id']);
     }
 
     public function getMainImage()

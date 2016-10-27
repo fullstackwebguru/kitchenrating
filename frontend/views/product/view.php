@@ -84,9 +84,14 @@ $this->registerMetaTag([
 	          <div class="p_colors">
 	            <span>color options</span>
 	            <div>
-	              <a href="#" style="background:#da4453"></a>
-	              <a href="#" style="background:#3d3c3c"></a>
-	              <a href="#" style="background:#eeeaeb"></a>
+	              <a href="javascript:void(0)" style="background:<?= $model->color ?>"></a>
+	              <?php 
+	              	foreach ($model->productColors as $color)  {
+	              ?>
+	              	<a href="javascript:void(0)" style="background:<?= $color->color ?>"></a>
+	              <?php 
+	              	}
+	              ?>
 	            </div>
 	          </div>
 	          <div class="rate_back">

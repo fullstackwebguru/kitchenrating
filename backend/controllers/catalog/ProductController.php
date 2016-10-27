@@ -7,9 +7,12 @@ use common\models\Category;
 use common\models\Product;
 use common\models\ProductImage;
 use common\models\ProductInfo;
+use common\models\ProductColor;
 use common\models\Store;
 use backend\models\ProductSearch;
 use backend\models\ProductInfoSearch;
+use backend\models\ProductColorSearch;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
@@ -39,7 +42,7 @@ class ProductController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'create','view', 'update', 'delete' ,'detach', 'upload','addinfo','deleteinfo'],
+                        'actions' => ['index', 'create','view', 'update', 'delete' ,'detach', 'upload','addinfo','deleteinfo','addcolor','deletecolor'],
                         'roles' => ['updateCatalog']
                     ]
                 ]
@@ -140,6 +143,10 @@ class ProductController extends Controller
         $searchModel->base_product_id = $id;
         $dataProvider = $searchModel->search([]);
 
+        $colorSearchModel = new ProductColorSearch();
+        $colorSearchModel->base_product_id = $id;
+        $colorDataProvider = $colorSearchModel->search([]);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -153,6 +160,7 @@ class ProductController extends Controller
             return $this->render('view', [
                 'model' => $model,
                 'dataProvider' => $dataProvider,
+                'colorDataProvider' => $colorDataProvider,
                 'viewMode' => $viewMode,
                 'categories' => $categories,
                 'stores' => $stores
@@ -198,6 +206,45 @@ class ProductController extends Controller
         ProductInfo::findOne($infoId)->delete();
         return $this->redirect(['view', 'id' => $model->id]);
     }
+
+
+    /**
+     * Add Product Color to product
+     * @param integer $id
+     * @return mixed
+     */
+    
+    public function actionAddcolor($id) {
+
+        $productModel = $this->findModel($id);
+        $model = new ProductColor();
+        $model->product_id = $id;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $productModel->id]);
+        }elseif (Yii::$app->request->isAjax) {
+            return $this->renderAjax('_colorform', [
+                        'model' => $model,
+            ]);
+        } else {
+            return $this->render('_colorform', [
+                        'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Delete Product Color to product
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDeletecolor($id, $colorId) {
+        $model = $this->findModel($id);
+        ProductColor::findOne($colorId)->delete();
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+
 
     /**
      * Detach Product Image  from Product

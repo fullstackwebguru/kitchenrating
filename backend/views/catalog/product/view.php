@@ -186,6 +186,7 @@ foreach($model->productImages as $pImage) {
 $viewMsg = 'Not applicable';
 $updateMsg = 'Not applicable';
 $deleteMsg = 'Delete Product information';
+$colorDeleteMsg = 'Delete Product Color';
 
 $gridColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
@@ -222,10 +223,40 @@ $gridColumns = [
     ],
 ];
 
+$colorGridColumns = [
+    ['class' => 'kartik\grid\SerialColumn'],
+    [
+        'attribute'=>'color',
+        'value'=>function ($model, $key, $index, $widget) {
+            return "<span class='badge' style='background-color: {$model->color}'> </span>  <code>" . $model->color . '</code>';
+        },
+        'format'=>'raw',
+    ],
+    [
+        'class' => 'kartik\grid\ActionColumn',
+        'dropdown' => false,
+        'vAlign'=>'middle',
+        'urlCreator' => function($action, $model, $key, $index) { 
+            if ($action == 'delete') {
+                return Url::toRoute(['deletecolor', 'id'=>$model->product->id, 'colorId'=>$key]);
+            } else {
+                return '';
+            }
+        },
+        'viewOptions'=>['title'=>$viewMsg, 'data-toggle'=>'tooltip', 'style'=>'display:none;'],
+        'updateOptions'=>['title'=>$updateMsg, 'data-toggle'=>'tooltip', 'style'=>'display:none;'],
+        'deleteOptions'=>['title'=>$colorDeleteMsg, 'data-toggle'=>'tooltip'], 
+    ],
+];
+
 $this->registerJs(
    '$(document).ready(function(){ 
         $(document).on("click", "#reset_productinfos", function() {
             $.pjax.reload({container:"#productinfos"});  //Reload GridView
+        });
+
+        $(document).on("click", "#reset_productcolors", function() {
+            $.pjax.reload({container:"#productcolors"});  //Reload GridView
         });
     });'
 );
@@ -299,6 +330,50 @@ $this->registerJs(
     </div>
 </div>
 
+
+<div class="row">
+    <div class="col-xs-12">
+    <div class="box-header with-border" id>
+    <h3 class="box-title">Additional Product Colors</h3>
+
+    <?= GridView::widget([
+        'dataProvider' => $colorDataProvider,
+        'columns' => $colorGridColumns,
+        'toolbar'=> false,
+        'export' => false,
+        'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
+        'headerRowOptions'=>['class'=>'kartik-sheet-style'],
+        'containerOptions' => ['style'=>'overflow: auto'], // only set when $responsive = false
+        'pjax' => true,
+        'bordered' => true,
+        'striped' => false,
+        'condensed' => false,
+        'responsive' => true,
+        'showFooter' => false,
+        'hover' => true,
+        'showPageSummary' => false,
+        'panel' => [
+            'type' => GridView::TYPE_PRIMARY,
+            'heading' => false,
+        ],
+        'toolbar'=> [
+            ['content'=>
+                Html::button('<i class="glyphicon glyphicon-plus"></i>', ['type'=>'button', 'title'=>'Add', 'id'=>'add_productcolors', 'class'=>'showModalButton btn btn-success', 'value'=>Url::toRoute(['addcolor', 'id'=>$model->id])]) . ' ' .
+                Html::button('<i class="glyphicon glyphicon-repeat"></i>', ['type'=>'button', 'title'=>'Reset', 'id'=>'reset_productcolors', 'class'=>'btn btn-default'])
+            ],
+        ],
+        'pjaxSettings' => [
+            'neverTimeout' => true,
+            'options' => [
+                'id' => 'productcolors'
+            ]
+        ]
+    ]);?>
+
+    </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-xs-12">
     <div class="box-header with-border">
@@ -338,6 +413,17 @@ $this->registerJs(
     ]);
         echo "<div class='modalContent' id='modalContent'></div>";
     yii\bootstrap\Modal::end();
+
+    yii\bootstrap\Modal::begin([
+        'header' => 'Add Color Info',
+        'id'=>'addProductColorModal',
+        'class' =>'modal',
+        'size' => 'modal-md',
+    ]);
+        echo "<div class='modalContent' id='modalColorContent'></div>";
+    yii\bootstrap\Modal::end();
+
+
         //js code:
     $this->registerJs('
 
@@ -345,6 +431,12 @@ $this->registerJs(
             $(document).on("click", "#add_productinfos", function() {
                 $("#addProductInfoModal").modal("show")
                     .find("#modalContent")
+                    .load($(this).attr("value"));
+            });
+
+            $(document).on("click", "#add_productcolors", function() {
+                $("#addProductColorModal").modal("show")
+                    .find("#modalColorContent")
                     .load($(this).attr("value"));
             });
         });
