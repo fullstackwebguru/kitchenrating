@@ -50,10 +50,6 @@ class Top10Controller extends Controller
         
         $model = $this->findModel($id);
         $products = $model->findTop10Products($post);
-        foreach ($products as $i => $product) {
-             $result[] = $product->rank;
-        }
-
         return $this->renderPartial('_productList', [
             'products' => $products
         ]);
